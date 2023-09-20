@@ -7,3 +7,6 @@ psycopg2-binary
 
 # windows 
 # psycopg2
+
+asyncpg
+fastapi-users[sqlalchemy]
