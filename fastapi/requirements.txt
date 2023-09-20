@@ -1,1 +1,9 @@
 fastapi[all]
+sqlalchemy
+alembic
+
+# macos
+psycopg2-binary
+
+# windows 
+# psycopg2
