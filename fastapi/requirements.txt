@@ -5,7 +5,7 @@ alembic
 # macos
 psycopg2-binary
 
-# windows 
+# windows
 # psycopg2
 
 asyncpg
