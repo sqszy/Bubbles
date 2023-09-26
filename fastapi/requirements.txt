@@ -1,12 +1,7 @@
-fastapi[all]
-sqlalchemy
 alembic
-
-# macos
-psycopg2-binary
-
-# windows
-# psycopg2
-
-asyncpg
+fastapi[all]
 fastapi-users[sqlalchemy]
+asyncpg
+python-dotenv
+sqlalchemy
+psycopg2
