@@ -17,10 +17,6 @@ class Place(Base):
     title: str = Column(String(length=320), unique=True, nullable=False)
     latitude: float = Column(Float, nullable=False)
     longitude: float = Column(Float, nullable=False)
-    creator_id = Column(Integer, ForeignKey(_resolve_child_model().id), nullable=False)
-
-    images = relationship("PlaceImage", back_populates="place")
-
     reviews = relationship("Review", back_populates="place")
 
 
@@ -33,17 +29,11 @@ class PlaceImage(Base):
     photo_url = Column(String, nullable=False)
     is_verified_photo: bool = Column(Boolean, default=False, nullable=False)
 
-    # Relationship to associate each image with a place
-    place = relationship("Place", back_populates="images")
 
 class Review(Base):
     __tablename__ = "review"
 
     id = Column(Integer, primary_key=True)
-    place_id = Column(Integer, ForeignKey("place.id"), nullable=False)
     text = Column(String, nullable=False)
-    # creator_id = Column(Integer, ForeignKey("user.id"), nullable=False)
-
-    # Relationship to associate each review with a place
+    place_id = Column(Integer, ForeignKey("place.id"), nullable=False)
     place = relationship("Place", back_populates="reviews")
-
