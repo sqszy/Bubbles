@@ -1,8 +1,11 @@
 from fastapi import FastAPI, Depends
+from sqlalchemy import MetaData
 
 from auth.base_config import auth_backend, fastapi_users, current_user
 from auth.models import User
 from auth.schemas import UserRead, UserCreate
+from sqlalchemy.ext.declarative import DeclarativeMeta, declarative_base
+
 
 app = FastAPI()
 
