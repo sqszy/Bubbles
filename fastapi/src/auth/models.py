@@ -1,5 +1,5 @@
-from datetime import datetime
-from sqlalchemy.orm import relationship
+import secrets
+from datetime import datetime, timedelta
 from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTable
 from sqlalchemy import Column, Integer, String, TIMESTAMP, Boolean, MetaData
 from sqlalchemy.ext.declarative import DeclarativeMeta, declarative_base
@@ -19,4 +19,5 @@ class User(SQLAlchemyBaseUserTable[int], Base):
     is_active: bool = Column(Boolean, default=True, nullable=False)
     is_superuser: bool = Column(Boolean, default=False, nullable=False)
     is_verified: bool = Column(Boolean, default=False, nullable=False)
-
+    verification_token = Column(String, nullable=False, default=secrets.token_urlsafe(4))
+    verification_token_expiration = Column(TIMESTAMP, nullable=False, default=datetime.utcnow() + timedelta(minutes=60))
