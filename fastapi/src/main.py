@@ -1,14 +1,10 @@
-from fastapi import Depends, FastAPI, BackgroundTasks
+from fastapi import FastAPI
 
-from auth.base_config import auth_backend, fastapi_users
-from auth.base_config import current_user
-from auth.models import User
-from auth.schemas import UserCreate, UserRead
-from src.database import get_async_session
-from tasks.background_tasks import delete_expired_unverified_users
+from auth.base_config import auth_backend
+from auth.schemas import UserCreate, UserRead, UserUpdate
+from src.auth.base_config import fastapi_users
 
 app = FastAPI()
-
 
 app.include_router(
     fastapi_users.get_auth_router(auth_backend, requires_verification=True),
@@ -30,11 +26,8 @@ app.include_router(
     prefix="/auth",
     tags=["auth"],
 )
-
-
-@app.get("/authenticated-route")
-async def authenticated_route(user: User = Depends(current_user)):
-    background_tasks = BackgroundTasks()
-    session = get_async_session()
-    background_tasks.add_task(delete_expired_unverified_users, session, background_tasks)
-    return {"message": f"Hello {user.email}!"}
+app.include_router(
+    fastapi_users.get_users_router(UserRead, UserUpdate, requires_verification=True),
+    prefix="/users",
+    tags=["users"],
+)
