@@ -1,5 +1,8 @@
+import re
 from typing import Optional
+
 from fastapi_users import schemas
+from pydantic import field_validator
 
 
 class UserRead(schemas.BaseUser[int]):
@@ -21,6 +24,12 @@ class UserCreate(schemas.BaseUserCreate):
     is_active: Optional[bool] = True
     is_superuser: Optional[bool] = False
     is_verified: Optional[bool] = False
+
+    @field_validator("email")
+    def validate_email(cls, email: str):
+        if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+            raise ValueError("Invalid email format")
+        return email
 
 
 class UserUpdate(schemas.BaseUserUpdate):
