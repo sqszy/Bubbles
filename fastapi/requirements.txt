@@ -6,5 +6,8 @@ python-dotenv
 sqlalchemy
 pydantic
 psycopg2
-pytz
-jwt
+PyJWT
+boto3
+botocore
+loguru
+python-magic-bin

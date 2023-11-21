@@ -64,7 +64,7 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
             self.verification_token_secret,
             self.verification_token_lifetime_seconds,
         )
-        # send_email_verify(user.email, user.username, token)
+        #  send_email_verify(user.email, user.username, token)
         await self.on_after_request_verify(user, token, request)
 
     async def verify(self, token: str, request: Optional[Request] = None) -> models.UP:

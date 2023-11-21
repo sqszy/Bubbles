@@ -1,8 +1,10 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, UploadFile, File
+from starlette.responses import JSONResponse
 
 from auth.base_config import auth_backend
 from auth.schemas import UserCreate, UserRead, UserUpdate
 from src.auth.base_config import fastapi_users
+from src.place.utils import upload_file
 
 app = FastAPI()
 
@@ -31,3 +33,8 @@ app.include_router(
     prefix="/users",
     tags=["users"],
 )
+
+
+@app.post('/upload', response_class=JSONResponse)
+async def upload(file: UploadFile = File(...)):
+    return await upload_file(file)
