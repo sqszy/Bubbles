@@ -1,6 +1,7 @@
-from sqlalchemy import Column, ForeignKey, Integer, String, Boolean, MetaData, Float
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, ForeignKey, Integer, String, MetaData, Float
 from sqlalchemy.ext.declarative import DeclarativeMeta, declarative_base
+from sqlalchemy.orm import relationship
+
 from src.auth.models import User
 
 metadata = MetaData()

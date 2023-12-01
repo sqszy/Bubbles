@@ -1,5 +1,4 @@
-import secrets
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTable
 from sqlalchemy import Column, Integer, String, TIMESTAMP, Boolean, MetaData
@@ -14,8 +13,8 @@ class User(SQLAlchemyBaseUserTable[int], Base):
 
     id = Column(Integer, primary_key=True)
     email: str = Column(String(length=320), unique=True, index=True, nullable=True)
-    image: str = Column(String, nullable=True)
     username = Column(String, nullable=False)
+    image: str = Column(String, nullable=False, unique=True)
     hashed_password: str = Column(String(length=1024), nullable=True)
     registered_at = Column(TIMESTAMP, nullable=False, default=datetime.now().replace(tzinfo=None))
     is_active: bool = Column(Boolean, default=True, nullable=False)

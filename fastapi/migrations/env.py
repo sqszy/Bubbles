@@ -10,8 +10,8 @@ from src.config import (
     DB_USER, SECRET_AUTH, SMTP_USER, SMTP_PASSWORD,
     SMTP_HOST, SMTP_PORT, S3_ID, S3_SECRET
 )
-from src.auth.models import metadata as models_metadata
-from src.place.models import metadata as user_metadata
+from src.auth.models import metadata as auth_metadata
+from src.place.models import metadata as place_metadata
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -43,7 +43,7 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = [models_metadata, user_metadata]
+target_metadata = [auth_metadata, place_metadata]
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:

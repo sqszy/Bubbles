@@ -1,9 +1,6 @@
-from typing import List
-
 from pydantic import BaseModel
 
 
-# Place CRUD classes
 class PlaceCreate(BaseModel):
     title: str
     latitude: float
@@ -26,7 +23,6 @@ class PlaceRead(BaseModel):
         orm_mode = True
 
 
-# Review CRUD classes
 class ReviewCreate(BaseModel):
     text: str
     creator_id: int
@@ -49,7 +45,6 @@ class ReviewRead(BaseModel):
         orm_mode = True
 
 
-# PlaceImage CRUD classes
 class PlaceImageCreate(BaseModel):
     photo_name: str
     photo_url: str

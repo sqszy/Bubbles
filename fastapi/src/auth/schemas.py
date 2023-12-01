@@ -9,7 +9,6 @@ class UserRead(schemas.BaseUser[int]):
     id: int
     username: str
     email: str
-    image: str
     is_active: bool = True
     is_superuser: bool = False
     is_verified: bool = False
@@ -43,7 +42,6 @@ class UserUpdate(schemas.BaseUserUpdate):
     username: Optional[str] = None
     password: Optional[str] = None
     email: Optional[str] = None
-    image: Optional[str] = None
     is_active: Optional[bool] = None
     is_superuser: Optional[bool] = None
     is_verified: Optional[bool] = None

@@ -22,7 +22,7 @@ SUPPORTED_FILE_TYPES = {
 
 KB = 1024
 MB = 1024 * KB
-MAX_FILES = 4
+MAX_FILES = 1
 AWS_BUCKET = 'bubbles'
 
 session = boto3.session.Session()
@@ -65,10 +65,10 @@ async def upload_files(files: List[UploadFile] = File(...)):
         contents = await file.read()
         size = len(contents)
 
-        if not 0 < size <= 5 * MB:
+        if not 0 < size <= 3 * MB:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail='Supported file size is 0 - 5 MB'
+                detail='Supported file size is 0 - 3 MB'
             )
 
         file_type = magic.from_buffer(buffer=contents, mime=True)
