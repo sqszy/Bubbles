@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from auth.base_config import auth_backend
 from auth.schemas import UserCreate, UserRead, UserUpdate
 from src.auth.base_config import fastapi_users
+from src.tasks.profile.router import router as photo_router
 
 app = FastAPI()
 
@@ -30,4 +31,8 @@ app.include_router(
     fastapi_users.get_users_router(UserRead, UserUpdate, requires_verification=True),
     prefix="/users",
     tags=["users"],
+)
+
+app.include_router(
+    photo_router, prefix="/users", tags=["users"]
 )

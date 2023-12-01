@@ -10,7 +10,7 @@ from fastapi_users.manager import BaseUserManager
 from src.auth.models import User
 from src.auth.utils import get_user_db
 from src.config import SECRET_AUTH
-from src.tasks.tasks import send_email_verify, send_email_reset_password
+from src.tasks.email.tasks import send_email_reset_password
 
 
 class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
@@ -64,7 +64,7 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
             self.verification_token_secret,
             self.verification_token_lifetime_seconds,
         )
-        # send_email_verify(user.email, user.username, token)
+        #  send_email_verify(user.email, user.username, token)
         await self.on_after_request_verify(user, token, request)
 
     async def verify(self, token: str, request: Optional[Request] = None) -> models.UP:
