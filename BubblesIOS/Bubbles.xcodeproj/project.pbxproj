@@ -14,6 +14,15 @@
 		B80289CA2AB9AA6500EFB14F /* BubblesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80289C92AB9AA6500EFB14F /* BubblesTests.swift */; };
 		B80289D42AB9AA6500EFB14F /* BubblesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80289D32AB9AA6500EFB14F /* BubblesUITests.swift */; };
 		B80289D62AB9AA6500EFB14F /* BubblesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80289D52AB9AA6500EFB14F /* BubblesUITestsLaunchTests.swift */; };
+		B8E813A82B24EEEC0051FF23 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E813A72B24EEEC0051FF23 /* LoginView.swift */; };
+		B8E813AA2B24EF5A0051FF23 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E813A92B24EF5A0051FF23 /* InputView.swift */; };
+		B8E813AC2B24FFC90051FF23 /* GlowyTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E813AB2B24FFC90051FF23 /* GlowyTextView.swift */; };
+		B8E813AF2B2509750051FF23 /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E813AE2B2509750051FF23 /* Webservice.swift */; };
+		B8E813B32B250F900051FF23 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E813B22B250F900051FF23 /* AuthViewModel.swift */; };
+		B8E813B72B251D500051FF23 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E813B62B251D500051FF23 /* RegistrationView.swift */; };
+		B8E813BA2B25265E0051FF23 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E813B92B25265E0051FF23 /* LocationManager.swift */; };
+		B8E813BD2B252BE80051FF23 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E813BC2B252BE80051FF23 /* HomeView.swift */; };
+		B8E813BF2B252C200051FF23 /* HomeMapViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E813BE2B252C200051FF23 /* HomeMapViewRepresentable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +53,15 @@
 		B80289CF2AB9AA6500EFB14F /* BubblesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BubblesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B80289D32AB9AA6500EFB14F /* BubblesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubblesUITests.swift; sourceTree = "<group>"; };
 		B80289D52AB9AA6500EFB14F /* BubblesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubblesUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B8E813A72B24EEEC0051FF23 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		B8E813A92B24EF5A0051FF23 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		B8E813AB2B24FFC90051FF23 /* GlowyTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlowyTextView.swift; sourceTree = "<group>"; };
+		B8E813AE2B2509750051FF23 /* Webservice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webservice.swift; sourceTree = "<group>"; };
+		B8E813B22B250F900051FF23 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		B8E813B62B251D500051FF23 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		B8E813B92B25265E0051FF23 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		B8E813BC2B252BE80051FF23 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		B8E813BE2B252C200051FF23 /* HomeMapViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMapViewRepresentable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +112,11 @@
 		B80289B72AB9AA6400EFB14F /* Bubbles */ = {
 			isa = PBXGroup;
 			children = (
-				B80289B82AB9AA6400EFB14F /* BubblesApp.swift */,
-				B80289BA2AB9AA6400EFB14F /* ContentView.swift */,
+				B8E813B82B2526560051FF23 /* Managers */,
+				B8E813AD2B2509640051FF23 /* Services */,
+				B8E813A42B24EECB0051FF23 /* Component */,
+				B8E813A32B24EEAB0051FF23 /* App */,
+				B8E813A12B24EE9B0051FF23 /* Core */,
 				B80289BC2AB9AA6500EFB14F /* Assets.xcassets */,
 				B80289BE2AB9AA6500EFB14F /* Preview Content */,
 			);
@@ -125,6 +146,92 @@
 				B80289D52AB9AA6500EFB14F /* BubblesUITestsLaunchTests.swift */,
 			);
 			path = BubblesUITests;
+			sourceTree = "<group>";
+		};
+		B8E813A12B24EE9B0051FF23 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				B8E813BB2B252BDF0051FF23 /* Home */,
+				B8E813A52B24EED80051FF23 /* Auth */,
+				B8E813A22B24EEA20051FF23 /* Root */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		B8E813A22B24EEA20051FF23 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				B80289BA2AB9AA6400EFB14F /* ContentView.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		B8E813A32B24EEAB0051FF23 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				B80289B82AB9AA6400EFB14F /* BubblesApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		B8E813A42B24EECB0051FF23 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				B8E813A92B24EF5A0051FF23 /* InputView.swift */,
+				B8E813AB2B24FFC90051FF23 /* GlowyTextView.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		B8E813A52B24EED80051FF23 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				B8E813B12B250F7E0051FF23 /* ViewModel */,
+				B8E813B02B250F7A0051FF23 /* View */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		B8E813AD2B2509640051FF23 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B8E813AE2B2509750051FF23 /* Webservice.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		B8E813B02B250F7A0051FF23 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B8E813A72B24EEEC0051FF23 /* LoginView.swift */,
+				B8E813B62B251D500051FF23 /* RegistrationView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B8E813B12B250F7E0051FF23 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B8E813B22B250F900051FF23 /* AuthViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B8E813B82B2526560051FF23 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				B8E813B92B25265E0051FF23 /* LocationManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		B8E813BB2B252BDF0051FF23 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				B8E813BC2B252BE80051FF23 /* HomeView.swift */,
+				B8E813BE2B252C200051FF23 /* HomeMapViewRepresentable.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,6 +364,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8E813AC2B24FFC90051FF23 /* GlowyTextView.swift in Sources */,
+				B8E813BD2B252BE80051FF23 /* HomeView.swift in Sources */,
+				B8E813A82B24EEEC0051FF23 /* LoginView.swift in Sources */,
+				B8E813B72B251D500051FF23 /* RegistrationView.swift in Sources */,
+				B8E813AF2B2509750051FF23 /* Webservice.swift in Sources */,
+				B8E813BF2B252C200051FF23 /* HomeMapViewRepresentable.swift in Sources */,
+				B8E813BA2B25265E0051FF23 /* LocationManager.swift in Sources */,
+				B8E813B32B250F900051FF23 /* AuthViewModel.swift in Sources */,
+				B8E813AA2B24EF5A0051FF23 /* InputView.swift in Sources */,
 				B80289BB2AB9AA6400EFB14F /* ContentView.swift in Sources */,
 				B80289B92AB9AA6400EFB14F /* BubblesApp.swift in Sources */,
 			);
@@ -419,11 +535,13 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Bubbles/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Приложению нужно ваше местоположение";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -447,11 +565,13 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Bubbles/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Приложению нужно ваше местоположение";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
