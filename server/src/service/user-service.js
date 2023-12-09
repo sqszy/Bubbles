@@ -11,141 +11,147 @@ const rand = () => Math.random().toString(36).substr(2, 8);
 const generateShortToken = () => rand();
 
 class UserService {
-    async registration(email, username, password) {
-        const candidate = await userModel.findOne({ email });
-        if (candidate) {
-            throw ApiError.BadRequest(
-                `Пользователь с почтовым адресом ${email} уже существует`
-            );
-        }
-        const hashPassword = await bcrypt.hash(password, 3);
-        const activationLink = uuid.v4();
+  async registration(email, username, password) {
+    const candidate = await userModel.findOne({ email });
+    if (candidate) {
+      throw ApiError.BadRequest(
+        `Пользователь с почтовым адресом ${email} уже существует`
+      );
+    }
+    const hashPassword = await bcrypt.hash(password, 3);
+    const activationLink = uuid.v4();
 
-        const user = await userModel.create({
-            email,
-            username,
-            password: hashPassword,
-            registeredAt: new Date().toISOString(),
-            isAdmin: false,
-            image: null,
-            activationLink,
-            resetToken,
-        });
-        await mailService.sendActivationMail(
-            email,
-            username,
-            `${config.API_URL}/api/auth/activate/${activationLink}`
-        );
+    const user = await userModel.create({
+      email,
+      username,
+      password: hashPassword,
+      registeredAt: new Date().toISOString(),
+      isAdmin: false,
+      image: null,
+      activationLink,
+      resetToken,
+    });
+    await mailService.sendActivationMail(
+      email,
+      username,
+      `${config.API_URL}/api/auth/activate/${activationLink}`
+    );
 
-        const userDto = new UserDto(user); // id, email, isActivated..
-        const tokens = tokenService.generateTokens({ ...userDto });
-        await tokenService.saveToken(userDto.id, tokens.refreshToken);
+    const userDto = new UserDto(user); // id, email, isActivated..
+    const tokens = tokenService.generateTokens({ ...userDto });
+    await tokenService.saveToken(userDto.id, tokens.refreshToken);
 
-        return {
-            ...tokens,
-            user: userDto,
-        };
+    return {
+      ...tokens,
+      user: userDto,
+    };
+  }
+
+  async activate(activationLink) {
+    const user = await userModel.findOne({ activationLink });
+    if (!user) {
+      throw ApiError.BadRequest("Некорректная ссылка активации");
+    }
+    user.isActivated = true;
+    await user.save();
+  }
+
+  async login(email, password) {
+    const user = await userModel.findOne({ email });
+    if (!user) {
+      throw ApiError.BadRequest("Пользователь с таким email не найден");
     }
 
-    async activate(activationLink) {
-        const user = await userModel.findOne({ activationLink });
-        if (!user) {
-            throw ApiError.BadRequest("Некорректная ссылка активации");
-        }
-        user.isActivated = true;
-        await user.save();
+    const isPassEquals = await bcrypt.compare(password, user.password);
+    if (!isPassEquals) {
+      throw ApiError.BadRequest("Неверный пароль");
     }
 
-    async login(email, password) {
-        const user = await userModel.findOne({ email });
-        if (!user) {
-            throw ApiError.BadRequest("Пользователь с таким email не найден");
-        }
+    const userDto = new UserDto(user);
+    const tokens = tokenService.generateTokens({ ...userDto });
+    await tokenService.saveToken(userDto.id, tokens.refreshToken);
 
-        const isPassEquals = await bcrypt.compare(password, user.password);
-        if (!isPassEquals) {
-            throw ApiError.BadRequest("Неверный пароль");
-        }
+    return {
+      ...tokens,
+      user: userDto,
+    };
+  }
 
-        const userDto = new UserDto(user);
-        const tokens = tokenService.generateTokens({ ...userDto });
-        await tokenService.saveToken(userDto.id, tokens.refreshToken);
+  async logout(refreshToken) {
+    const token = await tokenService.removeToken(refreshToken);
 
-        return {
-            ...tokens,
-            user: userDto,
-        };
+    return token;
+  }
+
+  async forgotPassword(email) {
+    const user = await userModel.findOne({ email });
+    if (!user) {
+      throw ApiError.BadRequest("Пользователь с таким email не найден");
     }
 
-    async logout(refreshToken) {
-        const token = await tokenService.removeToken(refreshToken);
+    const resetToken = generateShortToken();
+    user.resetToken = resetToken;
+    await user.save();
+    await mailService.sendPasswordResetMail(
+      user.email,
+      user.username,
+      resetToken
+    );
 
-        return token;
+    return true;
+  }
+
+  async resetPassword(token, newPassword) {
+    const user = await userModel.findOne({ resetToken: token });
+
+    if (!user) {
+      throw ApiError.BadRequest("Пользователь не найден");
     }
 
-    async forgotPassword(email) {
-        const user = await userModel.findOne({ email });
-        if (!user) {
-            throw ApiError.BadRequest("Пользователь с таким email не найден");
-        }
-
-        const resetToken = generateShortToken();
-        user.resetToken = resetToken;
-        await user.save();
-        await mailService.sendPasswordResetMail(
-            user.email,
-            user.username,
-            resetToken
-        );
-
-        return true;
+    if (token != user.resetToken) {
+      console.log("Incorrect reset token:", token);
+      throw ApiError.BadRequest("Некорректный токен сброса пароля");
     }
 
-    async resetPassword(token, newPassword) {
-        const user = await userModel.findOne({ resetToken: token });
+    const hashPassword = await bcrypt.hash(newPassword, 3);
+    user.password = hashPassword;
+    user.resetToken = null;
+    await user.save();
 
-        if (!user) {
-            throw ApiError.BadRequest("Пользователь не найден");
-        }
+    return true;
+  }
 
-        if (token != user.resetToken) {
-            console.log("Incorrect reset token:", token);
-            throw ApiError.BadRequest("Некорректный токен сброса пароля");
-        }
-
-        const hashPassword = await bcrypt.hash(newPassword, 3);
-        user.password = hashPassword;
-        user.resetToken = null;
-        await user.save();
-
-        return true;
+  async refresh(refreshToken) {
+    if (!refreshToken) {
+      throw ApiError.UnauthorizedError();
+    }
+    const userData = tokenService.validateAccessToken(refreshToken);
+    const TokenFromDb = await tokenService.findToken(refreshToken);
+    if (!userData || !TokenFromDb) {
+      throw ApiError.UnauthorizedError();
     }
 
-    async refresh(refreshToken) {
-        if (!refreshToken) {
-            throw ApiError.UnauthorizedError();
-        }
-        const userData = tokenService.validateAccessToken(refreshToken);
-        const TokenFromDb = await tokenService.findToken(refreshToken);
-        if (!userData || !TokenFromDb) {
-            throw ApiError.UnauthorizedError();
-        }
+    const user = await userModel.findById(userData.id);
+    const userDto = new UserDto(user);
+    const tokens = tokenService.generateTokens({ ...userDto });
+    await tokenService.saveToken(userDto.id, tokens.refreshToken);
 
-        const user = await userModel.findById(userData.id);
-        const userDto = new UserDto(user);
-        const tokens = tokenService.generateTokens({ ...userDto });
-        await tokenService.saveToken(userDto.id, tokens.refreshToken);
+    return {
+      ...tokens,
+      user: userDto,
+    };
+  }
 
-        return {
-            ...tokens,
-            user: userDto,
-        };
-    }
+  async getUser(userId) {
+    const user = await userModel.findById(userId);
+    const userDto = new UserDto(user);
+    return userDto;
+  }
 
-    async getAllUsers() {
-        const users = await userModel.find();
-        return users;
-    }
+  async getLiked(userId) {
+    const user = await userModel.findById(userId);
+    // return liked field or another collection which is ref to userid
+  }
 }
 
 module.exports = new UserService();
