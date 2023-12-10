@@ -19,12 +19,15 @@ struct LoginView: View {
                     VStack(spacing: 12) {
                         // welcome text
                         
-                        GlowyTextView(text: "ДОБРО ПОЖАЛОВАТЬ", colors: [.blue, .red], fontSize: 24).padding(.top, 80).padding(.bottom, 40)
+                        GlowyTextView(text: "ДОБРО ПОЖАЛОВАТЬ", colors: [
+                            Color(red: 66/255, green: 164/255, blue: 1),
+                            Color(red: 71/255, green: 255/255, blue: 255/255)
+                        ], fontSize: 24).padding(.top, 80).padding(.bottom, 40)
                         
                         
                         // inputs
                         
-                        VStack(spacing: 24) {
+                        VStack(spacing: 12) {
                             InputView(
                                 text: $authVM.email,
                                 placeholder: "name@example.com")
@@ -41,14 +44,18 @@ struct LoginView: View {
                             } label: {
                                 Text("Войти")
                                 .font(.system(size: 12))
-                                .foregroundColor(.white)
+                                .foregroundColor(.black)
+                                .fontWeight(.medium)
                                 .padding(.vertical, 10)
                                 .padding(.horizontal, 20)
                             }
-                            .background(Color(.systemBlue))
+                            .background(LinearGradient(colors: [
+                                Color(red: 66/255, green: 164/255, blue: 1),
+                                Color(red: 71/255, green: 255/255, blue: 255/255)
+                            ], startPoint: .leading, endPoint: .leading))
                             .cornerRadius(12)
                             
-                            // forgot pass
+                            Spacer()
                             
                             Button {
                                 print("forgot password")
@@ -57,10 +64,9 @@ struct LoginView: View {
                                 .font(.system(size: 12))
                                 .foregroundColor(.white)
                                 .padding(.vertical, 10)
-                                .padding(.horizontal, 20)
                             }
                             .cornerRadius(12)
-                    }
+                        }.padding(.top, 40)
                         Spacer()
                         
                         NavigationLink {

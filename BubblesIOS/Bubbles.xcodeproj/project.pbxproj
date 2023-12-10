@@ -23,6 +23,10 @@
 		B8E813BA2B25265E0051FF23 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E813B92B25265E0051FF23 /* LocationManager.swift */; };
 		B8E813BD2B252BE80051FF23 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E813BC2B252BE80051FF23 /* HomeView.swift */; };
 		B8E813BF2B252C200051FF23 /* HomeMapViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E813BE2B252C200051FF23 /* HomeMapViewRepresentable.swift */; };
+		B8E813C12B2533670051FF23 /* MapButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E813C02B2533670051FF23 /* MapButton.swift */; };
+		B8E813C32B2538640051FF23 /* MapAccountButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E813C22B2538640051FF23 /* MapAccountButton.swift */; };
+		B8E813C62B253BC70051FF23 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E813C52B253BC70051FF23 /* ProfileView.swift */; };
+		B8E813C92B25551C0051FF23 /* APIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E813C82B25551C0051FF23 /* APIModels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +66,10 @@
 		B8E813B92B25265E0051FF23 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		B8E813BC2B252BE80051FF23 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		B8E813BE2B252C200051FF23 /* HomeMapViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMapViewRepresentable.swift; sourceTree = "<group>"; };
+		B8E813C02B2533670051FF23 /* MapButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapButton.swift; sourceTree = "<group>"; };
+		B8E813C22B2538640051FF23 /* MapAccountButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAccountButton.swift; sourceTree = "<group>"; };
+		B8E813C52B253BC70051FF23 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		B8E813C82B25551C0051FF23 /* APIModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +120,7 @@
 		B80289B72AB9AA6400EFB14F /* Bubbles */ = {
 			isa = PBXGroup;
 			children = (
+				B8E813C72B25550B0051FF23 /* Models */,
 				B8E813B82B2526560051FF23 /* Managers */,
 				B8E813AD2B2509640051FF23 /* Services */,
 				B8E813A42B24EECB0051FF23 /* Component */,
@@ -151,6 +160,7 @@
 		B8E813A12B24EE9B0051FF23 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				B8E813C42B253BBE0051FF23 /* Profile */,
 				B8E813BB2B252BDF0051FF23 /* Home */,
 				B8E813A52B24EED80051FF23 /* Auth */,
 				B8E813A22B24EEA20051FF23 /* Root */,
@@ -179,6 +189,8 @@
 			children = (
 				B8E813A92B24EF5A0051FF23 /* InputView.swift */,
 				B8E813AB2B24FFC90051FF23 /* GlowyTextView.swift */,
+				B8E813C02B2533670051FF23 /* MapButton.swift */,
+				B8E813C22B2538640051FF23 /* MapAccountButton.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -232,6 +244,22 @@
 				B8E813BE2B252C200051FF23 /* HomeMapViewRepresentable.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		B8E813C42B253BBE0051FF23 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				B8E813C52B253BC70051FF23 /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		B8E813C72B25550B0051FF23 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B8E813C82B25551C0051FF23 /* APIModels.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -368,12 +396,16 @@
 				B8E813BD2B252BE80051FF23 /* HomeView.swift in Sources */,
 				B8E813A82B24EEEC0051FF23 /* LoginView.swift in Sources */,
 				B8E813B72B251D500051FF23 /* RegistrationView.swift in Sources */,
+				B8E813C12B2533670051FF23 /* MapButton.swift in Sources */,
 				B8E813AF2B2509750051FF23 /* Webservice.swift in Sources */,
+				B8E813C92B25551C0051FF23 /* APIModels.swift in Sources */,
 				B8E813BF2B252C200051FF23 /* HomeMapViewRepresentable.swift in Sources */,
 				B8E813BA2B25265E0051FF23 /* LocationManager.swift in Sources */,
+				B8E813C32B2538640051FF23 /* MapAccountButton.swift in Sources */,
 				B8E813B32B250F900051FF23 /* AuthViewModel.swift in Sources */,
 				B8E813AA2B24EF5A0051FF23 /* InputView.swift in Sources */,
 				B80289BB2AB9AA6400EFB14F /* ContentView.swift in Sources */,
+				B8E813C62B253BC70051FF23 /* ProfileView.swift in Sources */,
 				B80289B92AB9AA6400EFB14F /* BubblesApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
