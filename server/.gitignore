@@ -1,7 +1,2 @@
 .env
-venv
-.venv
-.vscode
-.idea
-__pycache__/
 node_modules

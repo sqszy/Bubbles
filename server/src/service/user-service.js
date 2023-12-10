@@ -11,147 +11,165 @@ const rand = () => Math.random().toString(36).substr(2, 8);
 const generateShortToken = () => rand();
 
 class UserService {
-  async registration(email, username, password) {
-    const candidate = await userModel.findOne({ email });
-    if (candidate) {
-      throw ApiError.BadRequest(
-        `Пользователь с почтовым адресом ${email} уже существует`
-      );
-    }
-    const hashPassword = await bcrypt.hash(password, 3);
-    const activationLink = uuid.v4();
+    async registration(email, username, password) {
+        const candidate = await userModel.findOne({ email });
+        if (candidate) {
+            throw ApiError.BadRequest(
+                `Пользователь с почтовым адресом ${email} уже существует`
+            );
+        }
+        const hashPassword = await bcrypt.hash(password, 3);
+        const activationLink = uuid.v4();
 
-    const user = await userModel.create({
-      email,
-      username,
-      password: hashPassword,
-      registeredAt: new Date().toISOString(),
-      isAdmin: false,
-      image: null,
-      activationLink,
-      resetToken,
-    });
-    await mailService.sendActivationMail(
-      email,
-      username,
-      `${config.API_URL}/api/auth/activate/${activationLink}`
-    );
+        const user = await userModel.create({
+            email,
+            username,
+            password: hashPassword,
+            registeredAt: new Date().toISOString(),
+            isAdmin: false,
+            image: null,
+            activationLink,
+            resetToken: "",
+        });
+        await mailService.sendActivationMail(
+            email,
+            username,
+            `${config.API_URL}/api/auth/activate/${activationLink}`
+        );
 
-    const userDto = new UserDto(user); // id, email, isActivated..
-    const tokens = tokenService.generateTokens({ ...userDto });
-    await tokenService.saveToken(userDto.id, tokens.refreshToken);
+        const userDto = new UserDto(user); // id, email, isActivated..
+        const tokens = tokenService.generateTokens({ ...userDto });
+        await tokenService.saveToken(userDto.id, tokens.refreshToken);
 
-    return {
-      ...tokens,
-      user: userDto,
-    };
-  }
-
-  async activate(activationLink) {
-    const user = await userModel.findOne({ activationLink });
-    if (!user) {
-      throw ApiError.BadRequest("Некорректная ссылка активации");
-    }
-    user.isActivated = true;
-    await user.save();
-  }
-
-  async login(email, password) {
-    const user = await userModel.findOne({ email });
-    if (!user) {
-      throw ApiError.BadRequest("Пользователь с таким email не найден");
+        return {
+            ...tokens,
+            user: userDto,
+        };
     }
 
-    const isPassEquals = await bcrypt.compare(password, user.password);
-    if (!isPassEquals) {
-      throw ApiError.BadRequest("Неверный пароль");
+    async activate(activationLink) {
+        const user = await userModel.findOne({ activationLink });
+        if (!user) {
+            throw ApiError.BadRequest("Некорректная ссылка активации");
+        }
+        user.isActivated = true;
+        await user.save();
     }
 
-    const userDto = new UserDto(user);
-    const tokens = tokenService.generateTokens({ ...userDto });
-    await tokenService.saveToken(userDto.id, tokens.refreshToken);
+    async login(email, password) {
+        const user = await userModel.findOne({ email });
+        if (!user) {
+            throw ApiError.BadRequest("Пользователь с таким email не найден");
+        }
 
-    return {
-      ...tokens,
-      user: userDto,
-    };
-  }
+        const isPassEquals = await bcrypt.compare(password, user.password);
+        if (!isPassEquals) {
+            throw ApiError.BadRequest("Неверный пароль");
+        }
 
-  async logout(refreshToken) {
-    const token = await tokenService.removeToken(refreshToken);
+        const userDto = new UserDto(user);
+        const tokens = tokenService.generateTokens({ ...userDto });
+        await tokenService.saveToken(userDto.id, tokens.refreshToken);
 
-    return token;
-  }
-
-  async forgotPassword(email) {
-    const user = await userModel.findOne({ email });
-    if (!user) {
-      throw ApiError.BadRequest("Пользователь с таким email не найден");
+        return {
+            ...tokens,
+            user: userDto,
+        };
     }
 
-    const resetToken = generateShortToken();
-    user.resetToken = resetToken;
-    await user.save();
-    await mailService.sendPasswordResetMail(
-      user.email,
-      user.username,
-      resetToken
-    );
+    async logout(refreshToken) {
+        const token = await tokenService.removeToken(refreshToken);
 
-    return true;
-  }
-
-  async resetPassword(token, newPassword) {
-    const user = await userModel.findOne({ resetToken: token });
-
-    if (!user) {
-      throw ApiError.BadRequest("Пользователь не найден");
+        return token;
     }
 
-    if (token != user.resetToken) {
-      console.log("Incorrect reset token:", token);
-      throw ApiError.BadRequest("Некорректный токен сброса пароля");
+    async forgotPassword(email) {
+        const user = await userModel.findOne({ email });
+        if (!user) {
+            throw ApiError.BadRequest("Пользователь с таким email не найден");
+        }
+
+        const resetToken = generateShortToken();
+        user.resetToken = resetToken;
+        await user.save();
+        await mailService.sendPasswordResetMail(
+            user.email,
+            user.username,
+            resetToken
+        );
+
+        return true;
     }
 
-    const hashPassword = await bcrypt.hash(newPassword, 3);
-    user.password = hashPassword;
-    user.resetToken = null;
-    await user.save();
+    async resetPassword(token, newPassword) {
+        const user = await userModel.findOne({ resetToken: token });
 
-    return true;
-  }
+        if (!user) {
+            throw ApiError.BadRequest("Пользователь не найден");
+        }
 
-  async refresh(refreshToken) {
-    if (!refreshToken) {
-      throw ApiError.UnauthorizedError();
+        if (token != user.resetToken) {
+            console.log("Incorrect reset token:", token);
+            throw ApiError.BadRequest("Некорректный токен сброса пароля");
+        }
+
+        const hashPassword = await bcrypt.hash(newPassword, 3);
+        user.password = hashPassword;
+        user.resetToken = null;
+        await user.save();
+
+        return true;
     }
-    const userData = tokenService.validateAccessToken(refreshToken);
-    const TokenFromDb = await tokenService.findToken(refreshToken);
-    if (!userData || !TokenFromDb) {
-      throw ApiError.UnauthorizedError();
+
+    async refresh(refreshToken) {
+        if (!refreshToken) {
+            throw ApiError.UnauthorizedError();
+        }
+        const userData = tokenService.validateRefreshToken(refreshToken);
+        const TokenFromDb = await tokenService.findToken(refreshToken);
+        if (!userData || !TokenFromDb) {
+            throw ApiError.UnauthorizedError();
+        }
+
+        const user = await userModel.findById(userData.id);
+        const userDto = new UserDto(user);
+        const tokens = tokenService.generateTokens({ ...userDto });
+        await tokenService.saveToken(userDto.id, tokens.refreshToken);
+
+        return {
+            ...tokens,
+            user: userDto,
+        };
     }
 
-    const user = await userModel.findById(userData.id);
-    const userDto = new UserDto(user);
-    const tokens = tokenService.generateTokens({ ...userDto });
-    await tokenService.saveToken(userDto.id, tokens.refreshToken);
+    async getUser(userId) {
+        const user = await userModel.findById(userId);
+        const userDto = new UserDto(user);
+        return userDto;
+    }
 
-    return {
-      ...tokens,
-      user: userDto,
-    };
-  }
+    async getLiked(userId) {
+        const user = await userModel.findById(userId);
+        // return liked field or another collection which is ref to userid
+    }
 
-  async getUser(userId) {
-    const user = await userModel.findById(userId);
-    const userDto = new UserDto(user);
-    return userDto;
-  }
+    async patchUser(userId, email, username, password) {
+        const user = await userModel.findById(userId);
 
-  async getLiked(userId) {
-    const user = await userModel.findById(userId);
-    // return liked field or another collection which is ref to userid
-  }
+        if (!user) {
+            throw ApiError.NotFoundError("Пользователь не найден");
+        }
+
+        if (email) user.email = email;
+        if (username) user.username = username;
+        if (password) user.password = await bcrypt.hash(password, 3);
+
+        await user.save();
+
+        const updatedUserDto = new UserDto(user);
+
+        return updatedUserDto;
+    }
 }
 
 module.exports = new UserService();

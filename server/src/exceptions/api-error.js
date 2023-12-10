@@ -15,4 +15,12 @@ module.exports = class ApiError extends Error {
     static BadRequest(message, errors = []) {
         return new ApiError(400, message, errors);
     }
+
+    static ForbiddenError(message) {
+        return new ApiError(403, message, errors);
+    }
+
+    static NotFoundError(message) {
+        return new ApiError(404, message, errors);
+    }
 };
