@@ -9,26 +9,26 @@ const SMTP_HOST = process.env.SMTP_HOST;
 const SMTP_PORT = process.env.SMTP_PORT;
 const API_URL = process.env.API_URL;
 const CLIENT_URL = process.env.CLIENT_URL;
-const aws_access_key = process.env.AWS_ACCESS_KEY;
-const aws_secret_access_key = process.env.AWS_SECRET_ACCESS_KEY;
-const aws_region = process.env.AWS_REGION;
-const aws_bucket = process.env.AWS_BUCKET;
-const aws_endpoint = process.env.AWS_ENDPOINT;
+const AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
+const AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY;
+const AWS_ENDPOINT = process.env.AWS_ENDPOINT;
+const AWS_REGION = process.env.AWS_REGION;
+const AWS_BUCKET = process.env.AWS_BUCKET;
 
 module.exports = {
-  PORT,
-  DB_URL,
-  JWT_ACCESS_SECRET,
-  JWT_REFRESH_SECRET,
-  SMTP_USER,
-  SMTP_PASSWORD,
-  SMTP_HOST,
-  SMTP_PORT,
-  API_URL,
-  CLIENT_URL,
-  aws_access_key,
-  aws_secret_access_key,
-  aws_region,
-  aws_bucket,
-  aws_endpoint,
+    PORT,
+    DB_URL,
+    JWT_ACCESS_SECRET,
+    JWT_REFRESH_SECRET,
+    SMTP_USER,
+    SMTP_PASSWORD,
+    SMTP_HOST,
+    SMTP_PORT,
+    API_URL,
+    CLIENT_URL,
+    AWS_ACCESS_KEY,
+    AWS_SECRET_ACCESS_KEY,
+    AWS_ENDPOINT,
+    AWS_REGION,
+    AWS_BUCKET,
 };
