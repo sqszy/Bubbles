@@ -27,6 +27,7 @@
 		B8E813C32B2538640051FF23 /* MapAccountButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E813C22B2538640051FF23 /* MapAccountButton.swift */; };
 		B8E813C62B253BC70051FF23 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E813C52B253BC70051FF23 /* ProfileView.swift */; };
 		B8E813C92B25551C0051FF23 /* APIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E813C82B25551C0051FF23 /* APIModels.swift */; };
+		B8E813CB2B255F330051FF23 /* ProfileListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E813CA2B255F330051FF23 /* ProfileListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 		B8E813C22B2538640051FF23 /* MapAccountButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAccountButton.swift; sourceTree = "<group>"; };
 		B8E813C52B253BC70051FF23 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		B8E813C82B25551C0051FF23 /* APIModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModels.swift; sourceTree = "<group>"; };
+		B8E813CA2B255F330051FF23 /* ProfileListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,6 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				B8E813C52B253BC70051FF23 /* ProfileView.swift */,
+				B8E813CA2B255F330051FF23 /* ProfileListViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 				B8E813AA2B24EF5A0051FF23 /* InputView.swift in Sources */,
 				B80289BB2AB9AA6400EFB14F /* ContentView.swift in Sources */,
 				B8E813C62B253BC70051FF23 /* ProfileView.swift in Sources */,
+				B8E813CB2B255F330051FF23 /* ProfileListViewModel.swift in Sources */,
 				B80289B92AB9AA6400EFB14F /* BubblesApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

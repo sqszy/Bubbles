@@ -83,7 +83,7 @@ class Webservice {
     
     func fetchUserInfo(accessToken: String, completion: @escaping (Result<User, AuthenticationError>) -> Void) {
         guard let url = URL(string: "http://localhost:8080/api/users/me") else {
-            completion(.failure(.custom(errorMessage: "Invalid URL")))
+            completion(.failure(.invalidURL))
             return
         }
         
@@ -92,7 +92,7 @@ class Webservice {
         
         URLSession.shared.dataTask(with: request) {(data, response, error) in
             guard let data = data, error == nil else {
-                completion(.failure(.custom(errorMessage: "No data")))
+                completion(.failure(.NoData))
                 return
             }
             

@@ -10,6 +10,9 @@ import Foundation
 enum AuthenticationError: Error {
     case invalidCredentials
     case custom(errorMessage: String)
+    case invalidURL
+    case NoData
+    case decodingError
 }
 
 enum RegistrationError: Error {
