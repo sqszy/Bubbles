@@ -11,6 +11,7 @@ import Foundation
 class AuthViewModel: ObservableObject {
     var email: String = ""
     var password: String = ""
+    var username: String = ""
     @Published var isAuth: Bool = false
     
     init() {
@@ -20,11 +21,11 @@ class AuthViewModel: ObservableObject {
     func checkAuthStatus() {
         let defaults = UserDefaults.standard
         
-        if let token = defaults.string(forKey: "jsonwebtoken") {
-            // Если токен сохранен, пользователь аутентифицирован
+        if defaults.string(forKey: "accessToken") != nil {
+            
             isAuth = true
         } else {
-            // Если нет, пользователь не аутентифицирован
+            
             isAuth = false
         }
     }
@@ -34,8 +35,15 @@ class AuthViewModel: ObservableObject {
         
         Webservice().login(email: email, password: password) { result in
             switch result {
-            case .success(let token):
-                defaults.setValue(token, forKey: "jsonwebtoken")
+            case .success(let authResponse):
+                guard let accessToken = authResponse.accessToken,
+                      let refreshToken = authResponse.refreshToken else {
+                    // Обработка ошибки, если токены не были получены
+                    return
+                }
+                
+                defaults.setValue(accessToken, forKey: "accessToken")
+                defaults.setValue(refreshToken, forKey: "refreshToken")
                 DispatchQueue.main.async {
                     self.isAuth = true
                     self.checkAuthStatus()
@@ -46,13 +54,38 @@ class AuthViewModel: ObservableObject {
         }
     }
     
+    func register() {
+        let defaults = UserDefaults.standard
+        
+        Webservice().register(email: email, username: username, password: password) { result in
+            switch result {
+            case .success(let authResponse):
+                guard let accessToken = authResponse.accessToken,
+                      let refreshToken = authResponse.refreshToken else {
+                    // Обработка ошибки, если токены не были получены
+                    return
+                }
+                
+                defaults.setValue(accessToken, forKey: "accessToken")
+                defaults.setValue(refreshToken, forKey: "refreshToken")
+                DispatchQueue.main.async {
+                    self.isAuth = true
+                    self.checkAuthStatus()
+                }
+            case .failure(let error):
+                print("error is here")
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+
     func signOut() {
         let defaults = UserDefaults.standard
         
-        // Удаляем сохраненный токен "jsonwebtoken" из UserDefaults
-        defaults.removeObject(forKey: "jsonwebtoken")
+        defaults.removeObject(forKey: "accessToken")
+        defaults.removeObject(forKey: "refreshToken")
         
-        // Обнуляем статус аутентификации в AuthViewModel
         isAuth = false
     }
 }

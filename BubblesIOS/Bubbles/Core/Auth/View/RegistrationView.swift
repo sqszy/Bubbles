@@ -17,37 +17,50 @@ struct RegistrationView: View {
                 VStack(spacing: 12) {
                     // welcome text
                     
-                    GlowyTextView(text: "ДОБРО ПОЖАЛОВАТЬ", colors: [.blue, .red], fontSize: 24).padding(.top, 80).padding(.bottom, 40)
+                    GlowyTextView(text: "ДОБРО ПОЖАЛОВАТЬ", colors: [
+                        Color(red: 66/255, green: 164/255, blue: 1),
+                        Color(red: 71/255, green: 255/255, blue: 255/255)
+                    ], fontSize: 24).padding(.top, 80).padding(.bottom, 40)
                     
-                    Image(systemName: authVM.isAuth ? "lock.open" : "lock.fill").foregroundColor(.white)
                     
                     // inputs
                     
-                    VStack(spacing: 24) {
+                    VStack(spacing: 12) {
                         InputView(
                             text: $authVM.email,
                             placeholder: "name@example.com")
                         .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                         
-                        InputView(text: $authVM.password, placeholder: "Пароль", isSecureField: true)
+                        InputView(
+                            text: $authVM.username,
+                            placeholder: "Ваше имя пользователя")
+                        .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                        
+                        InputView(text: $authVM.password, placeholder: "Ваш пароль", isSecureField: true)
                     }
                     
                     HStack {
                         // login
                         Button {
-                            print("loggin in...")
-                            authVM.login()
+                            print("registering and logging in...")
+                            authVM.register()
                         } label: {
-                            Text("Войти")
-                            .font(.system(size: 12))
-                            .foregroundColor(.white)
-                            .padding(.vertical, 10)
-                            .padding(.horizontal, 20)
-                        }
-                        .background(Color(.systemBlue))
-                        .cornerRadius(12)
+                            Text("Регистрация")
+                                .font(.system(size: 12))
+                                .foregroundColor(.black)
+                                .fontWeight(.medium)
+                                .padding(.vertical, 10)
+                                .padding(.horizontal, 20)
+                            }
+                            .background(LinearGradient(colors: [
+                                Color(red: 66/255, green: 164/255, blue: 1),
+                                Color(red: 71/255, green: 255/255, blue: 255/255)
+                            ], startPoint: .leading, endPoint: .leading))
+                            .cornerRadius(12)
                         
                         // forgot pass
+                        
+                        Spacer()
                         
                         Button {
                             print("forgot password")
@@ -59,7 +72,7 @@ struct RegistrationView: View {
                             .padding(.horizontal, 20)
                         }
                         .cornerRadius(12)
-                }
+                    }.padding(.top, 40)
                     Spacer()
                     
                     Button {
@@ -74,7 +87,7 @@ struct RegistrationView: View {
                         .font(.system(size: 12))
                         .foregroundColor(.white)
                     }
-            }
+                }.padding(.horizontal, 20)
         }
     }
 }

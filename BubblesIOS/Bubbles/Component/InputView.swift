@@ -14,7 +14,8 @@ struct InputView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             if isSecureField {
-                SecureField(placeholder, text: $text)
+                SecureField("", text: $text, prompt: Text(placeholder)
+                    .foregroundColor(.white))
                     .font(.system(size: 12))
                     .padding(.vertical, 10)
                     .padding(.leading, 12)
@@ -23,7 +24,8 @@ struct InputView: View {
                     .cornerRadius(12)
                 
             } else {
-                TextField(placeholder, text: $text)
+                TextField("", text: $text, prompt: Text(placeholder)
+                    .foregroundColor(.white))
                     .font(.system(size: 12))
                     .padding(.vertical, 10)
                     .padding(.leading, 12)
