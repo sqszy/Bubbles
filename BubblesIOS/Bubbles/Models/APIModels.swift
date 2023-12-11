@@ -47,3 +47,11 @@ struct RegisterRequestBody: Codable {
     let username: String
     let password: String
 }
+
+struct UploadImageResponse: Codable {
+    let success: Bool
+}
+
+struct UploadImageBody: Codable {
+    let file: Data
+}

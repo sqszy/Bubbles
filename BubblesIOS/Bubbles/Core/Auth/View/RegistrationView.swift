@@ -51,12 +51,12 @@ struct RegistrationView: View {
                                 .fontWeight(.medium)
                                 .padding(.vertical, 10)
                                 .padding(.horizontal, 20)
-                            }
-                            .background(LinearGradient(colors: [
-                                Color(red: 66/255, green: 164/255, blue: 1),
-                                Color(red: 71/255, green: 255/255, blue: 255/255)
-                            ], startPoint: .leading, endPoint: .leading))
-                            .cornerRadius(12)
+                        }
+                        .background(LinearGradient(colors: [
+                            Color(red: 66/255, green: 164/255, blue: 1),
+                            Color(red: 71/255, green: 255/255, blue: 255/255)
+                        ], startPoint: .leading, endPoint: .leading))
+                        .cornerRadius(12)
                         
                         // forgot pass
                         
@@ -66,10 +66,10 @@ struct RegistrationView: View {
                             print("forgot password")
                         } label: {
                             Text("забыли пароль?")
-                            .font(.system(size: 12))
-                            .foregroundColor(.white)
-                            .padding(.vertical, 10)
-                            .padding(.horizontal, 20)
+                                .font(.system(size: 12))
+                                .foregroundColor(.white)
+                                .padding(.vertical, 10)
+                                .padding(.horizontal, 20)
                         }
                         .cornerRadius(12)
                     }.padding(.top, 40)
@@ -88,9 +88,9 @@ struct RegistrationView: View {
                         .foregroundColor(.white)
                     }
                 }.padding(.horizontal, 20)
+            }
         }
     }
-}
 }
 
 #Preview {

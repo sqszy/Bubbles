@@ -14,9 +14,46 @@ class Webservice {
         return UserDefaults.standard.string(forKey: "accessToken") ?? ""
     }
     
+    
+    
+    func uploadAvatar(accessToken: String, imageData: Data, completion: @escaping (Result<UploadImageResponse, AuthenticationError>) -> Void) {
+        guard let url = URL(string: "http://192.168.0.101:8080/api/users/upload-image") else {
+            completion(.failure(.custom(errorMessage: "URL is not correct")))
+            return
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        
+        let boundary = UUID().uuidString
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        
+        var body = Data()
+        let boundaryPrefix = "--\(boundary)\r\n"
+        
+        body.append(imageData)
+        
+        request.httpBody = body
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard let data = data, error == nil else {
+                completion(.failure(.NoData))
+                return
+            }
+            
+            guard let avatarResponse = try? JSONDecoder().decode(UploadImageResponse.self, from: data) else {
+                completion(.failure(.invalidCredentials))
+                return
+            }
+            
+            completion(.success(avatarResponse))
+            
+        }.resume()
+    }
+    
     func login(email: String, password: String, completion: @escaping (Result<AuthResponse, AuthenticationError>) -> Void) {
         
-        guard let url = URL(string: "http://localhost:8080/api/auth/login") else {
+        guard let url = URL(string: "http://192.168.0.101:8080/api/auth/login") else {
             completion(.failure(.custom(errorMessage: "URL is not correct")))
             return
         }
@@ -46,7 +83,7 @@ class Webservice {
     }
     
     func register(email: String, username: String, password: String, completion: @escaping (Result<AuthResponse, RegistrationError>) -> Void) {
-        guard let url = URL(string: "http://localhost:8080/api/auth/registration") else {
+        guard let url = URL(string: "http://192.168.0.101:8080/api/auth/registration") else {
             completion(.failure(.custom(errorMessage: "URL is not correct")))
             return
         }
@@ -82,7 +119,7 @@ class Webservice {
     }
     
     func fetchUserInfo(accessToken: String, completion: @escaping (Result<User, AuthenticationError>) -> Void) {
-        guard let url = URL(string: "http://localhost:8080/api/users/me") else {
+        guard let url = URL(string: "http://192.168.0.101:8080/api/users/me") else {
             completion(.failure(.invalidURL))
             return
         }

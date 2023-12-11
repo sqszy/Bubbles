@@ -30,8 +30,8 @@ struct GlowyTextView: View {
                         endPoint: .trailing
                     )
                     .mask(Text(text)
-                            .font(.system(size: fontSize))
-                            .fontWeight(.bold)
+                        .font(.system(size: fontSize))
+                        .fontWeight(.bold)
                     )
                 ).blur(radius: 32)
             Text(text)
@@ -44,8 +44,8 @@ struct GlowyTextView: View {
                         endPoint: .trailing
                     )
                     .mask(Text(text)
-                            .font(.system(size: fontSize))
-                            .fontWeight(.bold)
+                        .font(.system(size: fontSize))
+                        .fontWeight(.bold)
                     )
                 )
         }
@@ -55,5 +55,5 @@ struct GlowyTextView: View {
 
 #Preview {
     GlowyTextView(text: "Пример текста", colors: [.red, .blue, .green, .yellow], fontSize: 24)
-
+    
 }

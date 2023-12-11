@@ -79,7 +79,7 @@ class AuthViewModel: ObservableObject {
         }
     }
     
-
+    
     func signOut() {
         let defaults = UserDefaults.standard
         
