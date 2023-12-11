@@ -13,13 +13,17 @@ struct ContentView: View {
     var body: some View {
         Group {
             if authViewModel.isAuth {
-                HomeView().environmentObject(authViewModel)
+                HomeView().environmentObject(
+                    authViewModel
+                )
             } else {
-                LoginView().environmentObject(authViewModel)
+                LoginView().environmentObject(
+                    authViewModel
+                )
             }
         }
     }
-
+    
 }
 
 struct ContentView_Previews: PreviewProvider {

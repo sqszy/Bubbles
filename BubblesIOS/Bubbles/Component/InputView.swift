@@ -16,23 +16,23 @@ struct InputView: View {
             if isSecureField {
                 SecureField("", text: $text, prompt: Text(placeholder)
                     .foregroundColor(.white))
-                    .font(.system(size: 12))
-                    .padding(.vertical, 10)
-                    .padding(.leading, 12)
-                    .foregroundColor(.white)
-                    .background(Color(UIColor(named: "AccentColor") ?? .clear))
-                    .cornerRadius(12)
+                .font(.system(size: 12))
+                .padding(.vertical, 10)
+                .padding(.leading, 12)
+                .foregroundColor(.white)
+                .background(Color(UIColor(named: "AccentColor") ?? .clear))
+                .cornerRadius(12)
                 
             } else {
                 TextField("", text: $text, prompt: Text(placeholder)
                     .foregroundColor(.white))
-                    .font(.system(size: 12))
-                    .padding(.vertical, 10)
-                    .padding(.leading, 12)
-                    .foregroundColor(.white)
-                    .background(Color(UIColor(named: "AccentColor") ?? .clear))
-                    .cornerRadius(12)
-                    
+                .font(.system(size: 12))
+                .padding(.vertical, 10)
+                .padding(.leading, 12)
+                .foregroundColor(.white)
+                .background(Color(UIColor(named: "AccentColor") ?? .clear))
+                .cornerRadius(12)
+                
             }
         }
     }
