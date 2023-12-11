@@ -20,7 +20,13 @@ class S3 {
         this.upload = multer({
             storage: this.storage,
             fileFilter: this.fileFilter,
-            limits: { fileSize: 10000000, files: 2 },
+            limits: { fileSize: 10000000, files: 1 },
+        });
+
+        this.uploadPlaceImages = multer({
+            storage: this.storage,
+            fileFilter: this.fileFilter,
+            limits: { fileSize: 10000000, files: 4 },
         });
 
         this.uploadToS3 = async (command) => {

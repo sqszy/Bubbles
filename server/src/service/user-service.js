@@ -30,6 +30,7 @@ class UserService {
             image: null,
             activationLink,
             resetToken: "",
+            favoritePlaces: [],
         });
         await mailService.sendActivationMail(
             email,
@@ -148,11 +149,6 @@ class UserService {
         return userDto;
     }
 
-    async getLiked(userId) {
-        const user = await userModel.findById(userId);
-        // return liked field or another collection which is ref to userid
-    }
-
     async patchUser(userId, email, username, password) {
         const user = await userModel.findById(userId);
 
@@ -169,6 +165,28 @@ class UserService {
         const updatedUserDto = new UserDto(user);
 
         return updatedUserDto;
+    }
+
+    async showLiked(userId) {
+        const user = await userModel
+            .findById(userId)
+            .populate("favoritePlaces");
+        if (!user) {
+            return null;
+        }
+        return user.favoritePlaces;
+    }
+
+    async addLiked(userId, placeId) {
+        await userModel.findByIdAndUpdate(userId, {
+            $addToSet: { favoritePlaces: placeId },
+        });
+    }
+
+    async deleteLiked(userId, placeId) {
+        await userModel.findByIdAndUpdate(userId, {
+            $pull: { favoritePlaces: placeId },
+        });
     }
 }
 

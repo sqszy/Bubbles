@@ -2,6 +2,9 @@ const Router = require("express").Router;
 const placeController = require("../controller/place-controller");
 const authMiddleware = require("../middleware/auth-middleware");
 const { body } = require("express-validator");
+const multer = require("multer");
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 const placeRouter = new Router();
 
@@ -15,6 +18,24 @@ placeRouter.delete(
     "/:placeId/delete-place",
     authMiddleware,
     placeController.deletePlace
+);
+
+placeRouter.post(
+    "/:placeId/upload-images",
+    authMiddleware,
+    upload.array("photos", 4),
+    placeController.uploadPlaceImages
+);
+placeRouter.patch(
+    "/:placeId/patch-images",
+    authMiddleware,
+    upload.array("photos", 4),
+    placeController.patchPlaceImages
+);
+placeRouter.delete(
+    "/:placeId/delete-images",
+    authMiddleware,
+    placeController.deleteAllPlaceImages
 );
 
 placeRouter.post(

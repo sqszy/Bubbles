@@ -3,9 +3,12 @@ const reviewModel = require("../models/review-model");
 const PlaceDto = require("../dtos/place-dto");
 const ReviewDto = require("../dtos/review-dto");
 const ApiError = require("../exceptions/api-error");
+const tagService = require("../service/tag-service");
+const mongoose = require("mongoose");
 
 class PlaceService {
-    async createPlace(title, about, latitude, longitude, creatorId) {
+    async createPlace(title, about, latitude, longitude, creatorId, tagNames) {
+        const tagIds = await tagService.getTagIdsByNames(tagNames);
         const place = await placeModel.create({
             title,
             about,
@@ -14,6 +17,7 @@ class PlaceService {
             images: [],
             reviews: [],
             creatorId,
+            tags: tagIds,
         });
 
         const placeDto = new PlaceDto(place);
@@ -87,7 +91,12 @@ class PlaceService {
         };
     }
 
-    async patchPlace(placeId, userId, updates) {
+    async patchPlace(placeId, userId, updates, tagNames) {
+        if (tagNames) {
+            const tagIds = await tagService.getTagIdsByNames(tagNames);
+            updates.tags = tagIds;
+        }
+
         const place = await placeModel.findOne({
             _id: placeId,
             creatorId: userId,
@@ -141,9 +150,18 @@ class PlaceService {
     }
 
     async getPlaceById(placeId) {
-        const place = await placeModel.findById(placeId);
+        let place;
+
+        if (mongoose.Types.ObjectId.isValid(placeId)) {
+            place = await placeModel.findById(placeId);
+        } else {
+            place = await placeModel.findOne({
+                name: { $regex: new RegExp(placeId, "i") },
+            });
+        }
+
         if (!place) {
-            throw ApiError.NotFoundError("Место не найдено");
+            throw new ApiError.NotFoundError("Место не найдено");
         }
 
         const placeDto = new PlaceDto(place);
@@ -163,12 +181,6 @@ class PlaceService {
             reviews,
         };
     }
-
-    async addTag() {}
-
-    async patchTag() {}
-
-    async deleteTag() {}
 }
 
 module.exports = new PlaceService();

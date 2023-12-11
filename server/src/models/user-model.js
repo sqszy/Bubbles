@@ -10,6 +10,7 @@ const UserSchema = new Schema({
     image: { type: String },
     activationLink: { type: String },
     resetToken: { type: String },
+    favoritePlaces: [{ type: Schema.Types.ObjectId, ref: "Place" }],
 });
 
 module.exports = model("User", UserSchema);
