@@ -1,7 +1,9 @@
+const config = require("../config/config");
+const placeModel = require("../models/place-model");
 const placeService = require("../service/place-service");
 const ApiError = require("../exceptions/api-error");
 const userModel = require("../models/user-model");
-const tagService = require("../service/tag-service");
+const photoService = require("../service/photo-service");
 const { validationResult } = require("express-validator");
 
 class PlaceController {
@@ -12,14 +14,16 @@ class PlaceController {
             if (!user) {
                 throw ApiError.UnauthorizedError();
             }
-            const { title, about, latitude, longitude } = req.body;
+
+            const { title, about, latitude, longitude, tagNames } = req.body;
 
             const newPlace = await placeService.createPlace(
                 title,
                 about,
                 latitude,
                 longitude,
-                userId
+                userId,
+                tagNames
             );
 
             res.json(newPlace);
@@ -83,7 +87,7 @@ class PlaceController {
         try {
             const userId = req.user.id;
             const placeId = req.params.placeId;
-            const { title, about, latitude, longitude } = req.body;
+            const { title, about, latitude, longitude, tagNames } = req.body;
 
             const updates = {};
             if (title) updates.title = title;
@@ -94,7 +98,8 @@ class PlaceController {
             const result = await placeService.patchPlace(
                 placeId,
                 userId,
-                updates
+                updates,
+                tagNames
             );
 
             res.json(result);
@@ -154,24 +159,111 @@ class PlaceController {
         }
     }
 
-    async addTag(req, res, next) {
+    async uploadPlaceImages(req, res, next) {
         try {
+            const placeId = req.params.placeId;
+            const files = req.files;
+
+            if (!files || files.length === 0) {
+                return next(ApiError.BadRequest("No images uploaded"));
+            }
+
+            const existingPlace = await placeModel.findById(placeId);
+
+            if (!existingPlace) {
+                return next(ApiError.NotFoundError("Place not found"));
+            }
+
+            const totalImages = existingPlace.images.length + files.length;
+
+            if (totalImages > 4) {
+                return next(
+                    ApiError.BadRequest("Exceeded maximum image limit")
+                );
+            }
+
+            const imageUrls = [];
+
+            for (const file of files) {
+                const params = {
+                    Key: file.originalname,
+                    Body: file.buffer,
+                    ContentType: file.mimetype,
+                };
+
+                await photoService.s3upload(params);
+
+                const imageUrl = `https://${config.AWS_BUCKET}.${config.AWS_ENDPOINT}/${file.originalname}`;
+                imageUrls.push(imageUrl);
+            }
+
+            await placeModel.findByIdAndUpdate(placeId, {
+                $push: { images: { $each: imageUrls } },
+            });
+
+            return res.json({ success: true, images: imageUrls });
         } catch (e) {
             next(e);
         }
     }
 
-    async patchTag(req, res, next) {
+    async patchPlaceImages(req, res, next) {
         try {
+            const placeId = req.params.placeId;
+            const files = req.files;
+
+            if (!files || files.length === 0) {
+                return next(ApiError.BadRequest("No images uploaded"));
+            }
+
+            const imageUrls = [];
+
+            for (const file of files) {
+                const params = {
+                    Key: file.originalname,
+                    Body: file.buffer,
+                    ContentType: file.mimetype,
+                };
+
+                await photoService.s3upload(params);
+
+                const imageUrl = `https://${config.AWS_BUCKET}.${config.AWS_ENDPOINT}/${file.originalname}`;
+                imageUrls.push(imageUrl);
+            }
+
+            await placeModel.findByIdAndUpdate(placeId, {
+                $set: { images: imageUrls },
+            });
+
+            return res.json({ success: true, images: imageUrls });
         } catch (e) {
             next(e);
         }
     }
 
-    async deleteTag(req, res, next) {
+    async deleteAllPlaceImages(req, res, next) {
         try {
-        } catch (e) {
-            next(e);
+            const placeId = req.params.placeId;
+
+            const existingPlace = await placeModel.findById(placeId);
+
+            if (!existingPlace) {
+                throw ApiError.NotFoundError("Place not found");
+            }
+
+            for (const image of existingPlace.images) {
+                const filename = image.split("/").pop();
+                await photoService.deleteImageFromS3(filename);
+            }
+
+            await placeModel.findByIdAndUpdate(placeId, { images: [] });
+
+            res.json({
+                success: true,
+                message: "All images deleted successfully",
+            });
+        } catch (error) {
+            next(error);
         }
     }
 }

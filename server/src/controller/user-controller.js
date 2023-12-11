@@ -167,7 +167,6 @@ class UserController {
             const userId = req.user.id;
             const { email, username, password } = req.body;
 
-            // Валидация данных
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
                 return next(
@@ -183,6 +182,75 @@ class UserController {
             );
 
             res.json(updatedUser);
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async patchAvatar(req, res, next) {
+        try {
+            if (!req.file) {
+                return next(ApiError.BadRequest("No new image provided"));
+            }
+
+            const params = {
+                Key: req.file.originalname,
+                Body: req.file.buffer,
+                ContentType: req.file.mimetype,
+            };
+            await photoService.s3upload(params);
+
+            const newUrl = `https://${config.AWS_BUCKET}.${config.AWS_ENDPOINT}/${req.file.originalname}`;
+
+            const userId = req.user.id;
+            const user = await userModel.findById(userId);
+
+            if (user.image) {
+                const previousFilename = user.image.split("/").pop();
+                await photoService.deleteImageFromS3(previousFilename);
+            }
+
+            await userModel.updateOne({ _id: userId }, { image: newUrl });
+
+            return res.send({ success: true });
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async showLiked(req, res, next) {
+        try {
+            const userId = req.user.id;
+            const favoritePlaces = await userService.showLiked(userId);
+            if (!favoritePlaces) {
+                throw ApiError.NotFoundError("User not found");
+            }
+            res.json(favoritePlaces);
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async addLiked(req, res, next) {
+        try {
+            const userId = req.user.id;
+            const placeId = req.params.placeId;
+            await userService.addLiked(userId, placeId);
+            res.json({ success: true, message: "Place added to favorites" });
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async deleteLiked(req, res, next) {
+        try {
+            const userId = req.user.id;
+            const placeId = req.params.placeId;
+            await userService.deleteLiked(userId, placeId);
+            res.json({
+                success: true,
+                message: "Place removed from favorites",
+            });
         } catch (e) {
             next(e);
         }
