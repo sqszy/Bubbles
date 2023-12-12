@@ -14,7 +14,7 @@ usersRouter.post(
     userController.uploadAvatar
 );
 usersRouter.patch(
-    "/:userId/patch-user",
+    "/userId/:userId/patch-user",
     authMiddleware,
     userController.patchUser
 );
@@ -28,9 +28,13 @@ usersRouter.delete("/delete-image", authMiddleware, userController.deleteImage);
 usersRouter.get("/me", authMiddleware, userController.getUser);
 
 usersRouter.get("/showLiked", authMiddleware, userController.showLiked);
-usersRouter.post("/:placeId/addLiked", authMiddleware, userController.addLiked);
+usersRouter.post(
+    "/placeId/:placeId/addLiked",
+    authMiddleware,
+    userController.addLiked
+);
 usersRouter.delete(
-    "/:placeId/deleteLiked",
+    "/placeId/:placeId/deleteLiked",
     authMiddleware,
     userController.deleteLiked
 );

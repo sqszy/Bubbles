@@ -5,6 +5,7 @@ const ReviewDto = require("../dtos/review-dto");
 const ApiError = require("../exceptions/api-error");
 const tagService = require("../service/tag-service");
 const mongoose = require("mongoose");
+const userModel = require("../models/user-model");
 
 class PlaceService {
     async createPlace(title, about, latitude, longitude, creatorId, tagNames) {
@@ -57,6 +58,11 @@ class PlaceService {
         if (!place) {
             throw ApiError.NotFoundError("Место не найдено");
         }
+
+        await userModel.updateMany(
+            { favoritePlaces: placeId },
+            { $pull: { favoritePlaces: placeId } }
+        );
 
         await reviewModel.deleteMany({ placeId });
 
@@ -180,6 +186,33 @@ class PlaceService {
         return {
             reviews,
         };
+    }
+
+    async search(query, tags) {
+        try {
+            let place;
+
+            if (query && tags) {
+                place = await placeModel.find({
+                    title: { $regex: query, $options: "i" },
+                    tags: tags,
+                });
+            } else if (query) {
+                place = await placeModel.find({
+                    title: { $regex: query, $options: "i" },
+                });
+            } else if (tags) {
+                place = await placeModel.find({ tags: tags });
+            } else {
+                throw new Error(
+                    "Not a valid request for search. Need ?query or ?tags."
+                );
+            }
+
+            return place;
+        } catch (error) {
+            console.error(error);
+        }
     }
 }
 

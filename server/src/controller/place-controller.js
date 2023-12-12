@@ -266,6 +266,19 @@ class PlaceController {
             next(error);
         }
     }
+
+    async search(req, res, next) {
+        try {
+            const query = req.query.query;
+            const tags = req.query.tags;
+
+            const result = await placeService.search(query, tags);
+
+            return res.json({ result });
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 module.exports = new PlaceController();
