@@ -10,62 +10,58 @@ const placeRouter = new Router();
 
 placeRouter.post("/create-place", authMiddleware, placeController.createPlace);
 placeRouter.patch(
-    "/placeId/:placeId/patch-place",
-    authMiddleware,
-    placeController.patchPlace
+  "/id/:placeId/patch-place",
+  authMiddleware,
+  placeController.patchPlace
 );
 placeRouter.delete(
-    "/placeId/:placeId/delete-place",
-    authMiddleware,
-    placeController.deletePlace
+  "/id/:placeId/delete-place",
+  authMiddleware,
+  placeController.deletePlace
 );
 
 placeRouter.post(
-    "/placeId/:placeId/upload-images",
-    authMiddleware,
-    upload.array("photos", 4),
-    placeController.uploadPlaceImages
+  "/id/:placeId/upload-images",
+  authMiddleware,
+  upload.array("photos", 4),
+  placeController.uploadPlaceImages
 );
 placeRouter.patch(
-    "/placeId/:placeId/patch-images",
-    authMiddleware,
-    upload.array("photos", 4),
-    placeController.patchPlaceImages
+  "/id/:placeId/patch-images",
+  authMiddleware,
+  upload.array("photos", 4),
+  placeController.patchPlaceImages
 );
 placeRouter.delete(
-    "/placeId/:placeId/delete-images",
-    authMiddleware,
-    placeController.deleteAllPlaceImages
+  "/id/:placeId/delete-images",
+  authMiddleware,
+  placeController.deleteAllPlaceImages
 );
 
 placeRouter.post(
-    "/placeId/:placeId/create-review",
-    authMiddleware,
-    body("rating").isInt({ min: 0, max: 5 }),
-    placeController.createReview
+  "/id/:placeId/create-review",
+  authMiddleware,
+  body("rating").isInt({ min: 0, max: 5 }),
+  placeController.createReview
 );
 placeRouter.patch(
-    "/placeId/:placeId/patch-review/:reviewId",
-    authMiddleware,
-    body("rating").isInt({ min: 0, max: 5 }),
-    placeController.patchReview
+  "/id/:placeId/patch-review/:reviewId",
+  authMiddleware,
+  body("rating").isInt({ min: 0, max: 5 }),
+  placeController.patchReview
 );
 placeRouter.delete(
-    "/reviewId/:reviewId/delete-review",
-    authMiddleware,
-    placeController.deleteReview
+  "/reviewId/:reviewId/delete-review",
+  authMiddleware,
+  placeController.deleteReview
 );
 
 placeRouter.get("/all", authMiddleware, placeController.getAllPlaces);
+placeRouter.get("/id/:placeId", authMiddleware, placeController.getPlaceById);
 placeRouter.get(
-    "/placeId/:placeId",
-    authMiddleware,
-    placeController.getPlaceById
-);
-placeRouter.get(
-    "/placeId/:placeId/reviews",
-    authMiddleware,
-    placeController.getReviewsForPlace
+  "/id/:placeId/reviews",
+  authMiddleware,
+  placeController.getReviewsForPlace
 );
 
 placeRouter.get("/search", authMiddleware, placeController.search);

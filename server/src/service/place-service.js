@@ -149,8 +149,7 @@ class PlaceService {
     async getAllPlaces() {
         const places = await placeModel.find({});
         const placeDtos = places.map((place) => new PlaceDto(place));
-
-        return {
+      return {
             places: placeDtos,
         };
     }
