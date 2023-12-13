@@ -1,7 +1,5 @@
-const ReviewDto = require("./review-dto");
-
 module.exports = class PlaceDto {
-    id;
+    _id;
     title;
     about;
     latitude;
@@ -12,14 +10,18 @@ module.exports = class PlaceDto {
     tags;
 
     constructor(model) {
-        this.id = model._id;
+        this._id = model._id;
         this.title = model.title;
         this.about = model.about;
         this.latitude = model.latitude;
         this.longitude = model.longitude;
         this.images = model.images;
         this.creatorId = model.creatorId;
-        this.reviews = model.reviews.map((review) => new ReviewDto(review));
+        this.reviews = model.reviews.map((review) => ({
+            id: review._id,
+            rating: review.rating,
+            text: review.text,
+        }));
         this.tags = model.tags;
     }
 };

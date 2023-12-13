@@ -6,6 +6,7 @@ const ApiError = require("../exceptions/api-error");
 const tagService = require("../service/tag-service");
 const mongoose = require("mongoose");
 const userModel = require("../models/user-model");
+const logger = require("../config/logger");
 
 class PlaceService {
     async createPlace(title, about, latitude, longitude, creatorId, tagNames) {
@@ -147,10 +148,10 @@ class PlaceService {
     }
 
     async getAllPlaces() {
-        const places = await placeModel.find({});
+        const places = await placeModel.find({}).populate("reviews");
         const placeDtos = places.map((place) => new PlaceDto(place));
-      return {
-            places: placeDtos,
+        return {
+            result: placeDtos,
         };
     }
 
@@ -158,11 +159,13 @@ class PlaceService {
         let place;
 
         if (mongoose.Types.ObjectId.isValid(placeId)) {
-            place = await placeModel.findById(placeId);
+            place = await placeModel.findById(placeId).populate("reviews");
         } else {
-            place = await placeModel.findOne({
-                name: { $regex: new RegExp(placeId, "i") },
-            });
+            place = await placeModel
+                .findOne({
+                    name: { $regex: new RegExp(placeId, "i") },
+                })
+                .populate("reviews");
         }
 
         if (!place) {
@@ -170,9 +173,7 @@ class PlaceService {
         }
 
         const placeDto = new PlaceDto(place);
-        return {
-            place: placeDto,
-        };
+        return placeDto;
     }
 
     async getReviewsForPlace(placeId) {
@@ -208,7 +209,11 @@ class PlaceService {
                 );
             }
 
-            return place;
+            const placeDtos = place.map((place) => new PlaceDto(place));
+
+            return {
+                result: placeDtos,
+            };
         } catch (error) {
             console.error(error);
         }

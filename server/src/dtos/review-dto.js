@@ -1,15 +1,15 @@
 module.exports = class ReviewDto {
-    id;
+    _id;
     text;
     rating;
     creatorId;
-    reviewId;
+    placeId;
 
     constructor(model) {
-        this.id = model._id;
+        this._id = model._id;
         this.text = model.text;
         this.rating = model.rating;
         this.creatorId = model.creatorId;
-        this.reviewId = model.reviewId;
+        this.placeId = model.placeId;
     }
 };
