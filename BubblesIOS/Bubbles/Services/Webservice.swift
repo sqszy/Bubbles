@@ -17,7 +17,7 @@ class Webservice {
     
     
     func uploadAvatar(accessToken: String, imageData: Data, completion: @escaping (Result<UploadImageResponse, AuthenticationError>) -> Void) {
-        guard let url = URL(string: "http://192.168.0.101:8080/api/users/upload-image") else {
+        guard let url = URL(string: "http://100.77.33.118:5000/api/users/upload-image") else {
             completion(.failure(.custom(errorMessage: "URL is not correct")))
             return
         }
@@ -53,7 +53,7 @@ class Webservice {
     
     func login(email: String, password: String, completion: @escaping (Result<AuthResponse, AuthenticationError>) -> Void) {
         
-        guard let url = URL(string: "http://192.168.0.101:8080/api/auth/login") else {
+        guard let url = URL(string: "http://100.77.33.118:5000/api/auth/login") else {
             completion(.failure(.custom(errorMessage: "URL is not correct")))
             return
         }
@@ -83,7 +83,7 @@ class Webservice {
     }
     
     func register(email: String, username: String, password: String, completion: @escaping (Result<AuthResponse, RegistrationError>) -> Void) {
-        guard let url = URL(string: "http://192.168.0.101:8080/api/auth/registration") else {
+        guard let url = URL(string: "http://100.77.33.118:5000/api/auth/registration") else {
             completion(.failure(.custom(errorMessage: "URL is not correct")))
             return
         }
@@ -119,7 +119,7 @@ class Webservice {
     }
     
     func fetchUserInfo(accessToken: String, completion: @escaping (Result<User, AuthenticationError>) -> Void) {
-        guard let url = URL(string: "http://192.168.0.101:8080/api/users/me") else {
+        guard let url = URL(string: "http://100.77.33.118:5000/api/users/me") else {
             completion(.failure(.invalidURL))
             return
         }
@@ -143,4 +143,99 @@ class Webservice {
             
         }.resume()
     }
+    
+    func searchPlace(query: String, tags: [String], accessToken: String, completion: @escaping (Result<[Place], AuthenticationError>) -> Void) {
+        var urlString = "http://100.77.33.118:5000/api/place/search?"
+        
+        // Добавляем параметр query
+        if !query.isEmpty {
+            urlString += "query=\(query)&"
+        }
+        
+        // Добавляем параметр tags
+        if !tags.isEmpty {
+            let tagsString = tags.joined(separator: ",")
+            urlString += "tags=\(tagsString)"
+        }
+        
+        guard let url = URL(string: urlString) else {
+            completion(.failure(.invalidURL))
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) {(data, response, error) in
+            guard let data = data, error == nil else {
+                completion(.failure(.NoData))
+                return
+            }
+            
+            guard let response = try? JSONDecoder().decode(SearchResult.self, from: data) else {
+                completion(.failure(.custom(errorMessage: "Decoding error")))
+                return
+            }
+            
+            completion(.success(response.result))
+        }.resume()
+    }
+    
+    func getPlaces(accessToken: String, completion: @escaping (Result<[Place], AuthenticationError>) -> Void) {
+        let urlString = "http://100.77.33.118:5000/api/place/all"
+        
+        guard let url = URL(string: urlString) else {
+            completion(.failure(.invalidURL))
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) {(data, response, error) in
+            guard let data = data, error == nil else {
+                completion(.failure(.NoData))
+                return
+            }
+            
+            guard let response = try? JSONDecoder().decode(SearchResult.self, from: data) else {
+                completion(.failure(.custom(errorMessage: "Decoding error")))
+                return
+            }
+            
+            completion(.success(response.result))
+        }.resume()
+    }
+    
+    func getPlace(id: String, accessToken: String, completion: @escaping (Result<Place, AuthenticationError>) -> Void) {
+        var urlString = "http://100.77.33.118:5000/api/place/id/"
+        
+        if (!id.isEmpty) {
+            urlString += id
+        }
+        
+        guard let url = URL(string: urlString) else {
+            completion(.failure(.invalidURL))
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) {(data, response, error) in
+            guard let data = data, error == nil else {
+                completion(.failure(.NoData))
+                return
+            }
+            
+            guard let response = try? JSONDecoder().decode(Place.self, from: data) else {
+                completion(.failure(.custom(errorMessage: "Decoding error")))
+                return
+            }
+            
+            completion(.success(response))
+        }.resume()
+        
+    }
+    
 }

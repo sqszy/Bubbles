@@ -28,23 +28,26 @@ struct ProfileView: View {
                             value: user.image != nil ?
                             AnyView(
                                 ZStack {
-                                    AsyncImage(url: URL(string: user.image!)!) { phase in
+                                    AsyncImage(
+                                        url: URL(string: user.image ?? ""),
+                                        transaction: Transaction(animation: .easeInOut)
+                                    ) { phase in
                                         switch phase {
                                         case .empty:
                                             ProgressView()
                                         case .success(let image):
                                             image
                                                 .resizable()
-                                                .aspectRatio(contentMode: .fill)
-                                                .frame(width: 50, height: 50) // Установите размер изображения по вашему желанию
+                                                .transition(.scale(scale: 0.1, anchor: .center))
                                         case .failure:
-                                            Image(systemName: "exclamationmark.triangle")
-                                                .resizable()
-                                                .frame(width: 50, height: 50) // Заглушка для случая ошибки загрузки изображения
+                                            Image(systemName: "wifi.slash")
                                         @unknown default:
                                             EmptyView()
                                         }
                                     }
+                                    .frame(width: 60, height: 60)
+                                    .background(Color.gray)
+                                    .clipShape(Circle())
                                     PhotosPicker(selection: $selectedPhoto, maxSelectionCount: 1, matching: .images) {
                                         Image(systemName: "camera.fill").foregroundColor(.white)
                                     }.onChange(of: selectedPhoto) { newValue in

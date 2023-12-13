@@ -55,3 +55,27 @@ struct UploadImageResponse: Codable {
 struct UploadImageBody: Codable {
     let file: Data
 }
+
+struct Place: Codable, Identifiable {
+    let _id: String
+    let title: String
+    let about: String
+    let latitude: Double
+    let longitude: Double
+    let creatorId: String
+    let images: [String]
+    let reviews: [Review]
+    let tags: [String]
+    var id: String { _id }
+}
+
+struct SearchResult: Codable {
+    let result: [Place]
+}
+
+struct Review: Codable, Hashable {
+    let text: String
+    let rating: Int
+    let creatorId: String
+    let placeId: String
+}
