@@ -14,6 +14,13 @@
 		B80289CA2AB9AA6500EFB14F /* BubblesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80289C92AB9AA6500EFB14F /* BubblesTests.swift */; };
 		B80289D42AB9AA6500EFB14F /* BubblesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80289D32AB9AA6500EFB14F /* BubblesUITests.swift */; };
 		B80289D62AB9AA6500EFB14F /* BubblesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80289D52AB9AA6500EFB14F /* BubblesUITestsLaunchTests.swift */; };
+		B84D2DA62B28CD18000E876F /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84D2DA52B28CD18000E876F /* SearchView.swift */; };
+		B84D2DAB2B28D242000E876F /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84D2DAA2B28D242000E876F /* SearchViewModel.swift */; };
+		B84D2DAE2B28FA7A000E876F /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84D2DAD2B28FA7A000E876F /* Color.swift */; };
+		B84D2DB02B290A72000E876F /* HomeMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84D2DAF2B290A72000E876F /* HomeMapViewModel.swift */; };
+		B84D2DB22B2911AF000E876F /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84D2DB12B2911AF000E876F /* MapView.swift */; };
+		B84D2DB42B292161000E876F /* PlaceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84D2DB32B292161000E876F /* PlaceButton.swift */; };
+		B84D2DB62B2928F3000E876F /* PlaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84D2DB52B2928F3000E876F /* PlaceViewModel.swift */; };
 		B8E813A82B24EEEC0051FF23 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E813A72B24EEEC0051FF23 /* LoginView.swift */; };
 		B8E813AA2B24EF5A0051FF23 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E813A92B24EF5A0051FF23 /* InputView.swift */; };
 		B8E813AC2B24FFC90051FF23 /* GlowyTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E813AB2B24FFC90051FF23 /* GlowyTextView.swift */; };
@@ -58,6 +65,15 @@
 		B80289CF2AB9AA6500EFB14F /* BubblesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BubblesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B80289D32AB9AA6500EFB14F /* BubblesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubblesUITests.swift; sourceTree = "<group>"; };
 		B80289D52AB9AA6500EFB14F /* BubblesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubblesUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B84D2DA52B28CD18000E876F /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		B84D2DA72B28CECA000E876F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B84D2DA82B28D06A000E876F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B84D2DAA2B28D242000E876F /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		B84D2DAD2B28FA7A000E876F /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		B84D2DAF2B290A72000E876F /* HomeMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMapViewModel.swift; sourceTree = "<group>"; };
+		B84D2DB12B2911AF000E876F /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		B84D2DB32B292161000E876F /* PlaceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceButton.swift; sourceTree = "<group>"; };
+		B84D2DB52B2928F3000E876F /* PlaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceViewModel.swift; sourceTree = "<group>"; };
 		B8E813A72B24EEEC0051FF23 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		B8E813A92B24EF5A0051FF23 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		B8E813AB2B24FFC90051FF23 /* GlowyTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlowyTextView.swift; sourceTree = "<group>"; };
@@ -122,6 +138,8 @@
 		B80289B72AB9AA6400EFB14F /* Bubbles */ = {
 			isa = PBXGroup;
 			children = (
+				B84D2DAC2B28FA70000E876F /* Extensions */,
+				B84D2DA82B28D06A000E876F /* Info.plist */,
 				B8E813C72B25550B0051FF23 /* Models */,
 				B8E813B82B2526560051FF23 /* Managers */,
 				B8E813AD2B2509640051FF23 /* Services */,
@@ -145,6 +163,7 @@
 		B80289C82AB9AA6500EFB14F /* BubblesTests */ = {
 			isa = PBXGroup;
 			children = (
+				B84D2DA72B28CECA000E876F /* Info.plist */,
 				B80289C92AB9AA6500EFB14F /* BubblesTests.swift */,
 			);
 			path = BubblesTests;
@@ -159,9 +178,27 @@
 			path = BubblesUITests;
 			sourceTree = "<group>";
 		};
+		B84D2DA92B28D234000E876F /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				B84D2DA52B28CD18000E876F /* SearchView.swift */,
+				B84D2DAA2B28D242000E876F /* SearchViewModel.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		B84D2DAC2B28FA70000E876F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B84D2DAD2B28FA7A000E876F /* Color.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		B8E813A12B24EE9B0051FF23 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				B84D2DA92B28D234000E876F /* Search */,
 				B8E813C42B253BBE0051FF23 /* Profile */,
 				B8E813BB2B252BDF0051FF23 /* Home */,
 				B8E813A52B24EED80051FF23 /* Auth */,
@@ -193,6 +230,7 @@
 				B8E813AB2B24FFC90051FF23 /* GlowyTextView.swift */,
 				B8E813C02B2533670051FF23 /* MapButton.swift */,
 				B8E813C22B2538640051FF23 /* MapAccountButton.swift */,
+				B84D2DB32B292161000E876F /* PlaceButton.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -244,6 +282,9 @@
 			children = (
 				B8E813BC2B252BE80051FF23 /* HomeView.swift */,
 				B8E813BE2B252C200051FF23 /* HomeMapViewRepresentable.swift */,
+				B84D2DAF2B290A72000E876F /* HomeMapViewModel.swift */,
+				B84D2DB12B2911AF000E876F /* MapView.swift */,
+				B84D2DB52B2928F3000E876F /* PlaceViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -399,14 +440,21 @@
 				B8E813BD2B252BE80051FF23 /* HomeView.swift in Sources */,
 				B8E813A82B24EEEC0051FF23 /* LoginView.swift in Sources */,
 				B8E813B72B251D500051FF23 /* RegistrationView.swift in Sources */,
+				B84D2DB62B2928F3000E876F /* PlaceViewModel.swift in Sources */,
+				B84D2DB02B290A72000E876F /* HomeMapViewModel.swift in Sources */,
 				B8E813C12B2533670051FF23 /* MapButton.swift in Sources */,
 				B8E813AF2B2509750051FF23 /* Webservice.swift in Sources */,
+				B84D2DB22B2911AF000E876F /* MapView.swift in Sources */,
+				B84D2DAB2B28D242000E876F /* SearchViewModel.swift in Sources */,
+				B84D2DA62B28CD18000E876F /* SearchView.swift in Sources */,
 				B8E813C92B25551C0051FF23 /* APIModels.swift in Sources */,
 				B8E813BF2B252C200051FF23 /* HomeMapViewRepresentable.swift in Sources */,
 				B8E813BA2B25265E0051FF23 /* LocationManager.swift in Sources */,
+				B84D2DAE2B28FA7A000E876F /* Color.swift in Sources */,
 				B8E813C32B2538640051FF23 /* MapAccountButton.swift in Sources */,
 				B8E813B32B250F900051FF23 /* AuthViewModel.swift in Sources */,
 				B8E813AA2B24EF5A0051FF23 /* InputView.swift in Sources */,
+				B84D2DB42B292161000E876F /* PlaceButton.swift in Sources */,
 				B80289BB2AB9AA6400EFB14F /* ContentView.swift in Sources */,
 				B8E813C62B253BC70051FF23 /* ProfileView.swift in Sources */,
 				B8E813CB2B255F330051FF23 /* ProfileListViewModel.swift in Sources */,
@@ -497,7 +545,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -551,7 +599,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -572,6 +620,7 @@
 				DEVELOPMENT_TEAM = 7ST2TS55FC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Bubbles/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Приложению нужно ваше местоположение";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -603,6 +652,7 @@
 				DEVELOPMENT_TEAM = 7ST2TS55FC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Bubbles/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Приложению нужно ваше местоположение";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -630,8 +680,10 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7ST2TS55FC;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				INFOPLIST_FILE = BubblesTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = false.BubblesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -649,8 +701,10 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7ST2TS55FC;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				INFOPLIST_FILE = BubblesTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = false.BubblesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

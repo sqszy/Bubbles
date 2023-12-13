@@ -9,9 +9,10 @@ import SwiftUI
 
 struct HomeView: View {
     @State var showingBottomSheet = false
+    @State var showingSearchSheet = false
     var body: some View {
         ZStack {
-            HomeMapViewRepresentable()
+            MapView()
                 .ignoresSafeArea()
             
             VStack {
@@ -24,6 +25,8 @@ struct HomeView: View {
                             MapAccountButton(image: "person.fill")
                         }.sheet(isPresented: $showingBottomSheet) {
                             ProfileView()
+                            .presentationDetents([.large])
+                            .presentationDragIndicator(.visible)
                         }
                         
                         Button {
@@ -40,9 +43,11 @@ struct HomeView: View {
                 
                 HStack(spacing: 40) {
                     Button {
-                        // Действие для первой кнопки
+                        showingSearchSheet.toggle()
                     } label: {
                         MapButton(image: "magnifyingglass")
+                    }.sheet(isPresented: $showingSearchSheet) {
+                        SearchView()
                     }
                     
                     Button {
