@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "437619029365",
+    "project_id": "databaseforandroid-cbebb",
+    "storage_bucket": "databaseforandroid-cbebb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:437619029365:android:12793dfd9f76617fbb0f3c",
+        "android_client_info": {
+          "package_name": "com.example.itog"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCreK8XOLT7gZk1F7S-3NflsdlOoqk_Csw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

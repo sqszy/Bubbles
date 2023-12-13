@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".glav"
+    android:id="@+id/myview">
+    <com.sothree.slidinguppanel.SlidingUpPanelLayout
+        android:id="@+id/sliding_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:umanoPanelHeight="40dp"
+        app:umanoShadowHeight="20dp"
+        app:umanoParallaxOffset="100dp"
+        app:umanoAnchorPoint="0.9"
+        android:gravity="bottom">
+
+        <!-- Верхняя панель -->
+        <FrameLayout
+            android:id="@+id/top_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <!-- Здесь разместите содержимое верхней панели -->
+
+            <com.yandex.mapkit.mapview.MapView
+                android:id="@+id/yandexMapView2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp">
+            </com.yandex.mapkit.mapview.MapView>
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/addconteiner2"
+                android:visibility="gone">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/backaddplacefrommap"
+                    android:alpha="0.7"/>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:id="@+id/addconteiner21">
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_centerHorizontal="true"
+                        tools:context=".glav"
+                        android:id="@+id/addconteiner121">
+
+                        <ImageView
+                            android:layout_width="350dp"
+                            android:layout_height="100dp"
+                            android:layout_gravity="top"
+                            android:contentDescription="@string/place"
+                            android:src="@drawable/shapeforcontadd"
+                            android:background="@android:color/transparent"
+                            android:layout_marginTop="0dp"/>
+
+                        <LinearLayout
+                            android:layout_width="350dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical">
+
+                            <FrameLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:id="@+id/addphotobutt2"
+                                android:layout_marginEnd="10dp"
+                                android:alpha="0.7"
+                                android:layout_marginStart="20dp">
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/photoformaket2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:cardCornerRadius="10dp"
+                                    app:cardBackgroundColor="@color/black"
+                                    android:visibility="gone">
+                                    <ImageView
+                                        android:layout_width="60dp"
+                                        android:layout_height="60dp"
+                                        android:id="@+id/photo123"
+                                        android:adjustViewBounds="true"
+                                        android:scaleType="centerCrop"
+                                        android:outlineProvider="background"
+                                        android:clipToOutline="true" />
+                                </androidx.cardview.widget.CardView>
+                                <ImageButton
+                                    android:id="@+id/buttonaddphotocont1"
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:src="@drawable/shapeforaddphotocont"
+                                    android:contentDescription="@string/add"/>
+                                <ImageView
+                                    android:id="@+id/buttonaddphotocont21"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:src="@drawable/addphoto"
+                                    android:layout_gravity="center"/>
+                            </FrameLayout>
+
+                            <RelativeLayout
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginEnd="50dp">
+
+                                <EditText
+                                    android:id="@+id/zagadd2"
+                                    android:layout_width="200dp"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/zagolovok"
+                                    android:textColorHint="@color/text_log_pas"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/white"
+                                    android:maxLines="1"
+                                    android:background="@android:color/transparent"/>
+
+                                <TextView
+                                    android:layout_width="200dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/adres2"
+                                    android:textColor="@color/text_log_pas"
+                                    android:textSize="12sp"
+                                    android:textStyle="normal"
+                                    android:layout_below="@id/zagadd2"
+                                    android:background="@android:color/transparent"/>
+                            </RelativeLayout>
+                        </LinearLayout>
+                    </FrameLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_below="@id/addconteiner121"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp">
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <ImageButton
+                                android:id="@+id/yesbut2"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:background="@android:color/transparent"
+                                android:src="@drawable/backyesornoaddcont" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/infaboutplace2"
+                                android:textColor="@color/white"
+                                android:textSize="9sp"/>
+                        </FrameLayout>
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="40dp">
+
+                            <ImageButton
+                                android:id="@+id/nobut2"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:background="@android:color/transparent"
+                                android:src="@drawable/backyesornoaddcont"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/infaboutplace3"
+                                android:textColor="@color/white"
+                                android:textSize="9sp"/>
+                        </FrameLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+            </FrameLayout>
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/markeraddplace"
+                android:layout_gravity="center"
+                android:id="@+id/centerpoint"
+                android:visibility="gone"
+                android:layout_marginBottom="15dp"/>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:alpha="0.8">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="58dp"
+                    app:srcCompat="@drawable/shapeforpoisk"/>
+
+                <EditText
+                    android:id="@+id/search"
+                    android:layout_width="320dp"
+                    android:layout_height="48dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:hint="@string/poisk"
+                    android:maxLines="1"
+                    android:inputType="text"
+                    android:imeOptions="actionSearch"
+                    android:background="@drawable/shapebackforpoisk"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="12sp"
+                    android:layout_marginTop="5dp"/>
+            </FrameLayout>
+            <TextView
+                android:id="@+id/coordinate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="600dp"
+                android:visibility="gone" />
+
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="90dp"
+                android:layout_marginEnd="10dp">
+                <ImageButton
+                    android:id="@+id/logout"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:contentDescription="@string/logout"
+                    android:src="@drawable/backlogout" />
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/logout"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="530dp"
+                android:id="@+id/yesornordel"
+                android:visibility="gone"
+                android:alpha="0.8">
+                <ImageView
+                    android:id="@+id/imageView41"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/backformarkeryesno"/>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal">
+                    <TextView
+                        android:id="@+id/text12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/deleteplacemap"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/text12"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal">
+
+                        <FrameLayout
+                            android:id="@+id/DelForYes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <ImageButton
+                                android:id="@+id/Yesdel"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:background="@android:color/transparent"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/Yes" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="40dp">
+
+                            <ImageButton
+                                android:id="@+id/Nodel"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:background="@android:color/transparent"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/No" />
+                        </FrameLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="530dp"
+                android:id="@+id/yesornor"
+                android:visibility="gone"
+                android:alpha="0.8">
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/backformarkeryesno"/>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal">
+                    <TextView
+                        android:id="@+id/text1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/replace"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/text1"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal">
+
+                        <FrameLayout
+                            android:id="@+id/ContForYes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <ImageButton
+                                android:id="@+id/YesB"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:background="@android:color/transparent"/>
+
+                            <TextView
+                                android:id="@+id/Yes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/Yes" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="40dp">
+
+                            <ImageButton
+                                android:id="@+id/NoB"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:background="@android:color/transparent"/>
+
+                            <TextView
+                                android:id="@+id/No"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/No" />
+                        </FrameLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+            </FrameLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:id="@+id/zoom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="10dp">
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.8">
+                        <ImageButton
+                            android:id="@+id/plus"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:contentDescription="@string/plus"
+                            android:src="@drawable/back_forzoom" />
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/plus32"
+                            android:layout_gravity="center"
+                            android:background="@android:color/transparent"/>
+                    </FrameLayout>
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.8"
+                        android:layout_marginTop="15dp">
+                        <ImageButton
+                            android:id="@+id/minus"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:contentDescription="@string/minus"
+                            android:src="@drawable/back_forzoom" />
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/minus32"
+                            android:layout_gravity="center"
+                            android:background="@android:color/transparent"/>
+                    </FrameLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_below="@id/zoom"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="44dp"
+                    android:layout_marginTop="210dp">
+
+                    <ImageButton
+                        android:id="@+id/poisk"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:contentDescription="@string/poisk"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/poisk" />
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <ImageButton
+                            android:id="@+id/addplace"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:contentDescription="@string/addplace"
+                            android:src="@drawable/back_for_marker"
+                            android:layout_marginStart="40dp"
+                            android:background="@android:color/transparent"/>
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="55dp"
+                            app:srcCompat="@drawable/marker"
+                            android:layout_gravity="center_vertical" />
+                    </FrameLayout>
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <ImageButton
+                            android:id="@+id/like"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:contentDescription="@string/addplace"
+                            android:src="@drawable/back_for_marker"
+                            android:layout_marginStart="40dp"
+                            android:background="@android:color/transparent"/>
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="55dp"
+                            app:srcCompat="@drawable/navigator"
+                            android:layout_gravity="center_vertical" />
+                    </FrameLayout>
+
+                </LinearLayout>
+            </RelativeLayout>
+
+        </FrameLayout>
+
+
+        <!-- Нижняя панель -->
+        <FrameLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/bottom_layout"
+            android:background="@color/black">
+            <include layout="@layout/page2" android:visibility="gone"/>
+            <!-- Здесь разместите содержимое нижней панели -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/bottom_layout2"
+                android:background="@color/black">
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/widjet"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="175dp"
+                    android:layout_marginEnd="175dp"/>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp">
+
+                    <ImageView
+                        android:id="@+id/backpoisk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        app:srcCompat="@drawable/back" />
+
+                    <LinearLayout
+                        android:id="@+id/knopki2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageButton
+                            android:id="@+id/imageButton"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_marginStart="36dp"
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/poisk"
+                            android:src="@drawable/lupa" />
+
+                        <EditText
+                            android:id="@+id/editTextText"
+                            android:layout_width="270dp"
+                            android:layout_height="48dp"
+                            android:layout_weight="0"
+                            android:ems="10"
+                            android:inputType="text"
+                            android:hint="@string/poisk"
+                            android:textColor="@color/white"
+                            android:textColorHint="@color/text_log_pas"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginStart="5dp"
+                            android:background="@android:color/transparent"/>
+
+                    </LinearLayout>
+
+                </FrameLayout>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="150dp">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="460dp"
+                        android:padding="20dp"
+                        android:clipToPadding="false"
+                        android:background="@android:color/transparent"
+                        android:overScrollMode="never"/>
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/addconteiner"
+                        android:visibility="gone"
+                        android:layout_marginStart="20dp">
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="100dp"
+                            tools:context=".glav"
+                            android:id="@+id/addconteiner1">
+
+                            <ImageView
+                                android:layout_width="350dp"
+                                android:layout_height="100dp"
+                                android:layout_gravity="top"
+                                android:contentDescription="@string/place"
+                                android:src="@drawable/shapeforcontadd"
+                                android:background="@android:color/transparent"
+                                android:layout_marginTop="0dp"/>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical">
+
+                                <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:id="@+id/addphotobutt"
+                                    android:layout_marginEnd="10dp"
+                                    android:alpha="0.7"
+                                    android:layout_marginStart="20dp">
+                                    <androidx.cardview.widget.CardView
+                                        android:id="@+id/photoformaket"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        app:cardCornerRadius="10dp"
+                                        app:cardBackgroundColor="@color/black"
+                                        android:visibility="gone">
+                                        <ImageView
+                                            android:layout_width="60dp"
+                                            android:layout_height="60dp"
+                                            android:id="@+id/photo12"
+                                            android:adjustViewBounds="true"
+                                            android:scaleType="centerCrop"
+                                            android:outlineProvider="background"
+                                            android:clipToOutline="true" />
+                                    </androidx.cardview.widget.CardView>
+                                    <ImageButton
+                                        android:id="@+id/buttonaddphotocont"
+                                        android:layout_width="60dp"
+                                        android:layout_height="60dp"
+                                        android:src="@drawable/shapeforaddphotocont"
+                                        android:contentDescription="@string/add"/>
+                                    <ImageView
+                                        android:id="@+id/buttonaddphotocont2"
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:src="@drawable/addphoto"
+                                        android:layout_gravity="center"/>
+                                </FrameLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="200dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:layout_marginEnd="50dp">
+
+                                    <EditText
+                                        android:id="@+id/zagadd"
+                                        android:layout_width="200dp"
+                                        android:layout_height="wrap_content"
+                                        android:hint="@string/zagolovok"
+                                        android:textColorHint="@color/text_log_pas"
+                                        android:textSize="14sp"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/white"
+                                        android:maxLines="1"
+                                        android:background="@android:color/transparent"/>
+
+                                    <EditText
+                                        android:id="@+id/adresadd"
+                                        android:layout_width="200dp"
+                                        android:layout_height="30dp"
+                                        android:hint="@string/adres"
+                                        android:textColorHint="@color/text_log_pas"
+                                        android:textSize="12sp"
+                                        android:textStyle="normal"
+                                        android:layout_below="@id/zagadd"
+                                        android:textColor="@color/text_log_pas"
+                                        android:background="@android:color/transparent"/>
+                                </RelativeLayout>
+                            </LinearLayout>
+                        </FrameLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_below="@id/addconteiner1"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="5dp">
+                            <FrameLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <ImageButton
+                                    android:id="@+id/yesbut"
+                                    android:layout_width="48dp"
+                                    android:layout_height="48dp"
+                                    android:background="@android:color/transparent"
+                                    android:src="@drawable/backyesornoaddcont" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="@string/infaboutplace2"
+                                    android:textColor="@color/white"
+                                    android:textSize="9sp"/>
+                            </FrameLayout>
+                            <FrameLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="40dp">
+
+                                <ImageButton
+                                    android:id="@+id/nobut"
+                                    android:layout_width="48dp"
+                                    android:layout_height="48dp"
+                                    android:background="@android:color/transparent"
+                                    android:src="@drawable/backyesornoaddcont"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="@string/infaboutplace3"
+                                    android:textColor="@color/white"
+                                    android:textSize="9sp"/>
+                            </FrameLayout>
+                        </LinearLayout>
+                    </RelativeLayout>
+                </FrameLayout>
+                <Button
+                    android:id="@+id/dobavl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/add"
+                    android:gravity="center"
+                    android:layout_marginTop="630dp"/>
+
+            </FrameLayout>
+        </FrameLayout>
+     </com.sothree.slidinguppanel.SlidingUpPanelLayout>
+
+ </androidx.constraintlayout.widget.ConstraintLayout>

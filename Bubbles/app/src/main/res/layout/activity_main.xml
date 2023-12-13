@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/dobro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="58dp"
+        android:layout_marginTop="124dp"
+        android:layout_marginEnd="58dp"
+        android:text="@string/Vxod"
+        android:textColor="@color/chile"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:textStyle="bold"/>
+
+    <FrameLayout
+        android:id="@+id/cont"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_below="@id/dobro"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:id="@+id/back1"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="20dp"
+            app:srcCompat="@drawable/back_for_login"
+            android:contentDescription="@string/login"/>
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="330dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="40dp"
+            android:ems="10"
+            android:hint="@string/login"
+            android:inputType="text"
+            android:textColor="@color/white"
+            android:textColorHint="@color/text_log_pas"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:background="@android:color/transparent"/>
+
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/cont1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-20dp"
+        android:layout_below="@+id/cont">
+
+        <ImageView
+            android:id="@+id/back2"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="20dp"
+            app:srcCompat="@drawable/back_for_login"
+            android:contentDescription="@string/password"/>
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="330dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="40dp"
+            android:ems="10"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:textColor="@color/white"
+            android:textColorHint="@color/text_log_pas"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:background="@android:color/transparent"/>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/knopki"
+        android:layout_below="@+id/cont1"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="@string/vxod2"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="@string/reg"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/chile"
+            android:layout_marginStart="10dp"
+            android:textSize="12sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/zab"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/zab"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:gravity="center"
+            android:textColor="@color/text_log_pas"/>
+    </LinearLayout>
+
+</RelativeLayout>
